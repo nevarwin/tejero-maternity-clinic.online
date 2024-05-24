@@ -48,7 +48,7 @@
             </v-flex>
         </v-layout>
         <v-row>
-            <v-col xs="12" sm="6">
+            <v-col xs="12" sm="6" class="equal-height">
                 <v-card>
                     <v-card-title>Doctor List</v-card-title>
                     <v-card-text class="mt-5">
@@ -74,7 +74,7 @@
                     </v-card-text>
                 </v-card>
             </v-col>
-            <v-col xs="12" sm="6">
+            <v-col xs="12" sm="6" class="equal-height">
                 <v-card>
                     <v-card-title>Chart</v-card-title>
                     <v-card-text>
@@ -95,6 +95,22 @@
         <div><h1 style="color: red">THIS ACCOUNT IS INACTIVE</h1></div>
     </v-container>
 </template>
+
+<style scoped>
+.d-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.equal-height {
+    display: flex;
+    flex-direction: column;
+}
+
+.equal-height .v-card {
+    flex: 1;
+}
+</style>
 <script>
 import VueApexCharts from "vue-apexcharts";
 import { mapActions, mapState } from "vuex";
