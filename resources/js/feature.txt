@@ -1,0 +1,51 @@
+feature
+3 option [for admition / no records , for registration, patient with records]
+patient registration - with philhealth
+admition of patient - case number with attendant info
+
+
+during admition
+room vacancy - checking of vacancy
+room monitoring - graph / checklist per hour  / vital sign per time / partograph / 
+medication sheet per case
+admiting order sheet - request from doctors and input name of doctor
+case monitoring
+put newborn physician records to case
+
+after delivery
+creation of other details of documents
+final dianosis
+
+documents
+
+discharge of patient
+discharge summary / documents / abstruct
+
+online
+request document
+request monitoring
+
+
+other feature
+printing of forms
+
+
+option for login [login,patient]
+login
+patient
+
+
+schedule of consultation / checkup
+address option [select address, other address] - when not here on cavite
+secret question for forgot password
+
+
+
+
+master
+doctor master
+patient
+address master - not edited
+
+
+

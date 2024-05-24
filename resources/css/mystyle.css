@@ -1,0 +1,407 @@
+/*=====================================================*/
+/*				              Root                         */
+/*=====================================================*/
+
+/*----- set default font-family ----- */
+#app{
+    font-family: 'Arial';
+}
+
+.v-main{
+    background-color: #ffffff;
+}
+
+/*----- set default font-family ----- */
+.container-main{
+    max-width: 100% !important;
+}
+
+.row {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+
+
+/*=====================================================*/
+/*				         v-simple-table                    */
+/*=====================================================*/
+/*----- table zibra striped ----- */
+.v-data-table tbody tr:nth-child(even) {
+    background-color:white;
+    /* background: linear-gradient(180deg, #9fffd7, transparent) !important;
+    box-shadow: #00ff80 2px 2px 10px inset !important; */
+}
+.v-data-table tbody tr:hover{
+    background: #F5F5F5 !important;
+}
+
+
+/*----- table default height ----- */
+.v-data-table td,.v-data-table th{
+    height: 40px !important;
+    border: 1px solid rgb(43, 41, 41)
+}
+
+/*----- table mobile margin ----- */
+.v-data-table.mb4 table{
+    margin-bottom: 16px !important;
+}
+
+/*----- table thead color ----- */
+.v-data-table.mainTable th{
+    background: #ffffff !important;
+    color:white !important;
+}
+.v-data-table.v-data-table__wrapper table thead tr th{
+    background: #ffffff !important;
+    color:white !important;
+}
+
+/*----- home quick panel header link ----- */
+.quick-panel-header {
+    color: #333333 !important;
+    text-decoration: underline;
+}
+
+.quick-panel-header:hover {
+    color: #1967d2 !important;
+    text-decoration: none;
+}
+
+/*----- table link ----- */
+.v-data-table.mainTable tbody a:link{
+    color: #333333;
+    text-decoration: underline;
+}
+
+.v-data-table.mainTable tbody a:link:hover{
+    color: #1967d2;
+    text-decoration: none;
+}
+
+/*----- table visited ----- */
+.v-data-table.mainTable tbody a:visited {
+    color: #8E44AD;
+    text-decoration: underline;
+}
+
+tbody tr.active-row {
+    background: #e7effd !important;
+    color: #1866d1;
+}
+
+
+.v-data-table--fixed-header .v-input__slot{
+    margin-bottom: 0px !important;
+}
+
+.v-data-table--fixed-header .v-input--checkbox{
+    margin-top:0px !important;
+    padding-top: 0px !important;
+}
+
+.v-input--hide-details{
+    margin-top:0px !important;
+    padding-top: 0px !important;
+}
+
+.v-data-table--fixed-header .v-input--selection-controls__input{
+    margin-right: 0px !important;
+}
+
+.v-data-table--fixed-header .v-input--selection-controls__ripple{
+    margin: 0px !important;
+    height: 0px !important;
+    left: 0px !important;
+}
+
+.v-data-table--fixed-header .v-messages.theme--light{
+    display: none !important;
+}
+
+.v-data-table--fixed-header thead tr:nth-child(2) th{
+    top: 40px !important;
+}
+
+.v-data-table--fixed-header thead tr:nth-child(3) th{
+    top: 80px !important;
+}
+
+.sched-tbl.v-data-table--fixed-header thead tr:nth-child(2) th{
+    top: 92px !important;
+}
+
+.v-data-table--fixed-header thead tr:nth-child(2) th .v-input__slot,
+.v-data-table--fixed-header thead tr:nth-child(3) th .v-input__slot{
+    min-height: 28px !important;
+    max-height: 28px !important;
+    margin-bottom: 0px !important;
+    font-size: 12px;
+}
+
+.v-data-table--fixed-header thead tr:nth-child(2) th .v-text-field__details,
+.v-data-table--fixed-header thead tr:nth-child(3) th .v-text-field__details{
+    display: none;
+}
+
+.v-data-table--fixed-header thead tr:nth-child(2) th .v-text-field input,
+.v-data-table--fixed-header thead tr:nth-child(3) th .v-text-field input{
+    padding: 0px !important;
+}
+
+.v-data-table--fixed-header thead tr:nth-child(2) th .v-text-field.v-text-field--solo .v-input__control,
+.v-data-table--fixed-header thead tr:nth-child(3) th .v-text-field.v-text-field--solo .v-input__control{
+    min-height: 0px !important;
+}
+/*----- table header border left,right ----- */
+.v-data-table th{
+    border-left: 1px solid #2B2929 !important;
+    border-right: 1px solid #2B2929 !important;
+    background: #F5F5F5 !important;
+    color:black !important;
+    
+}
+/*----- table no shrink text  ----- */
+.v-data-table th,.v-data-table td{
+    white-space: nowrap !important;
+    font-size: 12px !important;
+}
+
+/*----- table sortable  ----- */
+th.Sortable{
+    cursor:pointer;
+}
+
+/*----- table sortable Icon  ----- */
+th.Sortable:after {
+    content: '\2003\2003';
+    position:absolute;
+    margin-left:4px;
+}
+
+th.Sortable.ASC::after{
+    font-family: 'Material Design Icons';
+    content: "\F045\2003";
+    font-weight: 400;
+    display: inline-block;
+}
+
+th.Sortable.DESC::after{
+    font-family: 'Material Design Icons';
+    content: "\F05D\2003";
+    font-weight: 400;
+    display: inline-block;
+}
+
+th.Filtered::after{
+    font-family: 'Material Design Icons';
+    content: "\F232\2003";
+    font-weight: 400;
+    display: inline-block;
+}
+
+th.Filtered.Sortable.Asc::after{
+    font-family: 'Material Design Icons';
+    content: "\F232\F045";
+    font-weight: 400;
+    display: inline-block;
+}
+
+th.Filtered.Sortable.Desc::after{
+    font-family: 'Material Design Icons';
+    content: "\F232\F05D";
+    font-weight: 400;
+    display: inline-block;
+}
+
+.v-data-table--fixed-header tbody .tr-active{
+    background: #e8f0fe !important;
+    color: #1967d2 !important;
+}
+
+.theme--light.v-data-table.v-data-table--fixed-header thead th{
+    box-shadow:none;
+}
+
+tr.records{
+    vertical-align: top;
+}
+
+.show-records {
+    font-size: 10px;
+}
+
+.mainTable tr.records:hover{
+    background: #ffffff !important;
+}
+
+.v-menu__content{
+    background: #ffffff !important;
+}
+
+.v-menu__content .v-list{
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+tr.inactive{
+    background:#999999 !important;
+    color:#ffffff !important;
+}
+
+tr.memo-old a{
+    color:#ffffff !important;
+}
+
+tbody tr.active-row {
+    background: #e7effd !important;
+    color: #1866d1 !important;
+}
+
+
+/*=====================================================*/
+/*				           v-dialog                        */
+/*=====================================================*/
+
+/*----- sticky header ----- */
+.v-dialog .v-card__title {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+
+/*----- dialog title ----- */
+.v-dialog .v-card .v-card__title{
+    background: #0E6D3A !important;
+    color: #ffffff !important;
+    padding: 4px 16px !important;
+}
+
+/*----- dialog text ----- */
+.v-dialog .v-card .v-card__text{
+    padding-bottom: 0px !important;
+}
+
+/*----- dialog header ----- */
+.v-dialog .v-card .v-card__title > .headline{
+    font-size: 16px !important;
+}
+
+.v-dialog .headline{
+    white-space: nowrap;
+    overflow: hidden;   
+    text-overflow: ellipsis;
+}
+
+.v-dialog > .v-card > .v-card__subtitle, .v-dialog > .v-card > .v-card__text{
+    padding: 0px 16px !important;
+}
+
+/*----- dialog container ----- */
+.v-dialog .container{
+    background: #ffffff !important;
+    padding: 0px !important;
+}
+
+/*----- dialog movable ----- */
+.v-dialog.v-dialog--active .v-card__title {
+    cursor: grab !important;
+}
+
+.v-dialog.v-dialog--active .v-card__title:active {
+    cursor: grabbing !important;
+}
+
+.v-dialog .row [class*="col"]{
+    padding: 0px 8px !important;
+}
+
+.v-dialog .row{
+    margin-top:16px !important;
+}
+
+.v-dialog .v-input__append-inner{
+    margin-top: 8px;
+}
+
+.v-dialog .v-text-field--outlined .v-label{
+    top: 12px !important;
+}
+
+.v-dialog .v-input--selection-controls{
+    margin-top: 4px !important;
+}
+
+.v-dialog .v-subheader{
+    height:20px !important;
+}
+
+.v-dialog .dropzone{
+    line-height: 250px;
+    height: 250px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.v-dialog .required .v-text-field__slot label::before,.v-dialog .required .v-select__slot label::before {
+    content: '* ';
+    color: red;
+}
+
+.v-dialog .optional .v-text-field__slot label::before,.v-dialog .optional .v-select__slot label::before {
+    content: '# ';
+    color: green;
+}
+
+.uppercase input{
+    text-transform: uppercase;
+}
+
+
+
+/* ================================== */
+/*             Custom Design          */
+/* ================================== */
+
+.edit-color{
+    color:#227093 !important;
+}
+.edit-color:hover{
+    color:#34ace0 !important;
+}
+
+.v-card__title {
+    background: #0E6D3A !important;
+    color: #ffffff !important;
+    padding: 4px 16px !important;
+}
+
+
+.blue_tr{
+    background: linear-gradient(180deg, #7afdfd, transparent) !important;
+    box-shadow: #00c2ff 2px 2px 10px inset !important;
+}
+
+.green_tr{
+    background: linear-gradient(180deg, #7afdb1, transparent) !important;
+    box-shadow: #3cff00 2px 2px 10px inset !important;
+}
+
+.green_tr:hover{
+    background: none !important;
+}
+.blue_tr:hover{
+    background: none !important;
+}
+
+.drawer-list:hover{
+    background: #c1ffac !important;
+}
+
+.drawer-list.v-list-item--active{  
+    background: #c1ffac !important;
+
+}
