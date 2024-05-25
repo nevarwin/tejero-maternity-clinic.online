@@ -4,17 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class NewBornRecord extends Migration
-{
+class NewBornRecord extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         //
-        Schema::create('new_born_record', function (Blueprint $table) {
+        Schema::create('new_borns', function (Blueprint $table) {
             $table->id(); // Auto-incrementing primary key
             $table->integer('patient_id');
             $table->string('case_no');
@@ -49,8 +47,7 @@ class NewBornRecord extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         //
     }
 }
