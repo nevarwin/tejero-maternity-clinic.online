@@ -18,6 +18,7 @@
                         >
                             ID
                         </th>
+                        <th>Case No</th>
                         <th>Time</th>
                         <th>Blood Presure</th>
                         <th>Temparature</th>
@@ -39,6 +40,7 @@
                         </td>
                         <td v-show="editMode">{{ vital_sign.id }}</td>
 
+                        <td>{{ vital_sign.case_no }}</td>
                         <td>{{ vital_sign.time }}</td>
                         <td>{{ vital_sign.blood_presure }}</td>
                         <td>{{ vital_sign.temperature }}</td>
@@ -117,7 +119,7 @@ export default {
             },
             vitalSign: {
                 time: moment().format("HH:mm:ss"),
-                case_no: parseInt(this.case_data.case_no),
+                case_no: this.case_data.case_no,
                 blood_presure: "",
                 temperature: "",
                 pulse_rate: "",
