@@ -18,21 +18,20 @@
             :items-per-page="10"
             class="elevation-1"
         >
-          
             <template v-slot:item.action="{ item }">
                 <v-icon @click="Edit(item)">mdi-pencil</v-icon>
                 <v-tooltip bottom>
-                            <template v-slot:activator="{ on }">
-                                <v-icon
-                                    color="error"
-                                    @click="toggleDelete(item.id,item)"
-                                    v-on="on"
-                                    >mdi-bed-empty</v-icon
-                                >
-                            </template>
-                            <span>Discharge Patient</span>
-                            <!-- Tooltip content -->
-                        </v-tooltip>
+                    <template v-slot:activator="{ on }">
+                        <v-icon
+                            color="error"
+                            @click="toggleDelete(item.id, item)"
+                            v-on="on"
+                            >mdi-exit-to-app</v-icon
+                        >
+                    </template>
+                    <span>Discharge Patient</span>
+                    <!-- Tooltip content -->
+                </v-tooltip>
             </template>
         </v-data-table>
         <insert-dialog
@@ -127,7 +126,7 @@ export default {
             tempName: null,
             tempId: null,
             dialogBtn: false,
-            bed_id:null,
+            bed_id: null,
             tempData: {
                 // case_no: moment().format("YYYY")+"-"+Math.floor(Math.random() * 1000).toString().padStart(3, '0')+'-'+Math.floor(Math.random() * 10000).toString().padStart(4, '0'),
                 patient_id: null,
@@ -169,8 +168,8 @@ export default {
             }),
                 (this.editMode = !this.editMode);
         },
-        toggleDelete(id,val) {
-            this.bed_id = val.bed_id
+        toggleDelete(id, val) {
+            this.bed_id = val.bed_id;
             this.tempId = id;
             this.agree.dialog = true;
         },
@@ -195,7 +194,7 @@ export default {
                         axios({
                             method: "post",
                             url: "update_bed",
-                            data: { id: this.tempData.bed_name, vacant:"yes" },
+                            data: { id: this.tempData.bed_name, vacant: "yes" },
                         });
                         // this.$refs.Insert.resetValidation()
                         this.getAdmision();
@@ -263,10 +262,10 @@ export default {
                     this.snackbar.color = "success";
                     this.closeAgree();
                     axios({
-                            method: "post",
-                            url: "update_bed",
-                            data: { id: this.bed_id, vacant:"no"},
-                        });
+                        method: "post",
+                        url: "update_bed",
+                        data: { id: this.bed_id, vacant: "no" },
+                    });
                     let audit = {
                         action: "Discharge Patient",
                         description: "Patient Discharged",
@@ -313,7 +312,16 @@ export default {
 
     mounted() {
         this.getAdmision();
-        this.tempData.case_no = moment().format("YYYY")+"-"+Math.floor(Math.random() * 1000).toString().padStart(3, '0')+'-'+Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+        this.tempData.case_no =
+            moment().format("YYYY") +
+            "-" +
+            Math.floor(Math.random() * 1000)
+                .toString()
+                .padStart(3, "0") +
+            "-" +
+            Math.floor(Math.random() * 10000)
+                .toString()
+                .padStart(4, "0");
     },
 };
 </script>
