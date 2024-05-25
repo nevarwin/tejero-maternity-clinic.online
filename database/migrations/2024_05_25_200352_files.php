@@ -13,12 +13,12 @@ class Files extends Migration {
     public function up() {
         //
         Schema::create(
-            'new_born_record',
+            'files',
             function (Blueprint $table) {
                 $table->id(); // Auto-incrementing primary key
                 $table->longText('path');
                 $table->string('file');
-                $table->int('case_no');
+                $table->integer('case_no');
             }
         );
     }
