@@ -22,7 +22,7 @@
                     <v-simple-table>
                         <thead>
                             <tr>
-                                <th>files</th>
+                                <th>Files</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -128,7 +128,6 @@ export default {
     methods: {
         async saveFile(value) {
             let extension = value[0].name.split(".");
-            console.log(extension[1]);
             if (
                 extension[1] == "jpg" ||
                 extension[1] == "pdf" ||
@@ -168,7 +167,7 @@ export default {
                         .post("api/saveFileDatabase", {
                             case_no: this.case_data.case_no,
                             file: fileAttach,
-                            path: "C:/Apache24/htdocs/clinic_system/storage/app/public/clinic_files",
+                            path: "./storage/public/storage/clinic_files",
                         })
                         .then(() => {
                             this.snackbar.show = true;
