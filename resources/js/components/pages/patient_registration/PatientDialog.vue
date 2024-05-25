@@ -127,34 +127,41 @@
                                                 name="name"
                                             ></v-text-field>
                                         </v-col>
-
-                                        <v-col cols="4">
-                                            <v-select
-                                                label="Religion"
-                                                v-model="patient.religion_id"
-                                                :items="religionData"
-                                                item-value="id"
-                                                item-text="name"
-                                                class="required"
-                                                dense
-                                                :rules="rules.required"
-                                                persistent-placeholder
-                                                outlined
-                                                name="religion"
-                                            ></v-select>
-                                        </v-col>
-                                        <v-col cols="4">
-                                            <v-text-field
-                                                label="Nationality"
-                                                v-model="patient.nationality"
-                                                class="required uppercase"
-                                                dense
-                                                :rules="rules.required"
-                                                persistent-placeholder
-                                                outlined
-                                                name="nationality"
-                                            ></v-text-field>
-                                        </v-col>
+                                        <template
+                                            v-if="patient.type_of_patient == 2"
+                                        >
+                                            <v-col cols="4">
+                                                <v-select
+                                                    label="Religion"
+                                                    v-model="
+                                                        patient.religion_id
+                                                    "
+                                                    :items="religionData"
+                                                    item-value="id"
+                                                    item-text="name"
+                                                    class="required"
+                                                    dense
+                                                    :rules="rules.required"
+                                                    persistent-placeholder
+                                                    outlined
+                                                    name="religion"
+                                                ></v-select>
+                                            </v-col>
+                                            <v-col cols="4">
+                                                <v-text-field
+                                                    label="Nationality"
+                                                    v-model="
+                                                        patient.nationality
+                                                    "
+                                                    class="required uppercase"
+                                                    dense
+                                                    :rules="rules.required"
+                                                    persistent-placeholder
+                                                    outlined
+                                                    name="nationality"
+                                                ></v-text-field>
+                                            </v-col>
+                                        </template>
                                         <v-col cols="4">
                                             <v-text-field
                                                 label="Birth Place"
@@ -167,18 +174,22 @@
                                                 name="birth_place"
                                             ></v-text-field>
                                         </v-col>
-                                        <v-col cols="12">
-                                            <v-text-field
-                                                label="Occupation"
-                                                v-model="patient.occupation"
-                                                class="required uppercase"
-                                                dense
-                                                :rules="rules.required"
-                                                persistent-placeholder
-                                                outlined
-                                                name="name"
-                                            ></v-text-field>
-                                        </v-col>
+                                        <template
+                                            v-if="patient.type_of_patient == 2"
+                                        >
+                                            <v-col cols="12">
+                                                <v-text-field
+                                                    label="Occupation"
+                                                    v-model="patient.occupation"
+                                                    class="required uppercase"
+                                                    dense
+                                                    :rules="rules.required"
+                                                    persistent-placeholder
+                                                    outlined
+                                                    name="name"
+                                                ></v-text-field>
+                                            </v-col>
+                                        </template>
                                         <v-col cols="4">
                                             <v-select
                                                 label="Sex"
@@ -194,20 +205,26 @@
                                                 name="sex"
                                             ></v-select>
                                         </v-col>
-                                        <v-col cols="8">
-                                            <v-text-field
-                                                label="Contact"
-                                                v-model="patient.contact_no"
-                                                class="required"
-                                                dense
-                                                @keypress="filterNumericInput"
-                                                :rules="rules.contactNo"
-                                                persistent-placeholder
-                                                outlined
-                                                name="contact"
-                                                maxlength="11"
-                                            ></v-text-field>
-                                        </v-col>
+                                        <template
+                                            v-if="patient.type_of_patient == 2"
+                                        >
+                                            <v-col cols="8">
+                                                <v-text-field
+                                                    label="Contact"
+                                                    v-model="patient.contact_no"
+                                                    class="required"
+                                                    dense
+                                                    @keypress="
+                                                        filterNumericInput
+                                                    "
+                                                    :rules="rules.contactNo"
+                                                    persistent-placeholder
+                                                    outlined
+                                                    name="contact"
+                                                    maxlength="11"
+                                                ></v-text-field>
+                                            </v-col>
+                                        </template>
                                     </v-row>
                                 </v-col>
                                 <v-col cols="12" lg="6" md="12" sm="12">
@@ -279,108 +296,120 @@
                                                 name="password"
                                             ></v-text-field>
                                         </v-col>
-                                        <v-col cols="6">
-                                            <v-select
-                                                label="Civil Status"
-                                                v-model="
-                                                    patient.civil_status_id
-                                                "
-                                                :items="selectCivil"
-                                                item-text="name"
-                                                item-value="id"
-                                                class="required"
-                                                dense
-                                                :rules="rules.required"
-                                                persistent-placeholder
-                                                outlined
-                                                name="password"
-                                            ></v-select>
-                                        </v-col>
-                                        <v-col cols="6">
-                                            <v-select
-                                                label="Province"
-                                                v-model="patient.province_id"
-                                                :items="provinceMaster"
-                                                item-text="name"
-                                                item-value="id"
-                                                dense
-                                                persistent-placeholder
-                                                outlined
-                                                name="password"
-                                            ></v-select>
-                                        </v-col>
+                                        <template
+                                            v-if="patient.type_of_patient == 2"
+                                        >
+                                            <v-col cols="6">
+                                                <v-select
+                                                    label="Civil Status"
+                                                    v-model="
+                                                        patient.civil_status_id
+                                                    "
+                                                    :items="selectCivil"
+                                                    item-text="name"
+                                                    item-value="id"
+                                                    class="required"
+                                                    dense
+                                                    :rules="rules.required"
+                                                    persistent-placeholder
+                                                    outlined
+                                                    name="password"
+                                                ></v-select>
+                                            </v-col>
+                                            <v-col cols="6">
+                                                <v-select
+                                                    label="Province"
+                                                    v-model="
+                                                        patient.province_id
+                                                    "
+                                                    :items="provinceMaster"
+                                                    item-text="name"
+                                                    item-value="id"
+                                                    dense
+                                                    persistent-placeholder
+                                                    outlined
+                                                    name="password"
+                                                ></v-select>
+                                            </v-col>
 
-                                        <v-col cols="6">
-                                            <v-autocomplete
-                                                label="Municipal"
-                                                v-model="
-                                                    patient.municipality_id
-                                                "
-                                                :items="selectMunicipal"
-                                                item-text="name"
-                                                item-value="id"
-                                                dense
-                                                persistent-placeholder
-                                                outlined
-                                                name="password"
-                                            ></v-autocomplete>
-                                        </v-col>
-                                        <v-col cols="6">
-                                            <v-autocomplete
-                                                label="Barangay"
-                                                v-model="patient.barangay_id"
-                                                :items="selectBarangay"
-                                                item-text="name"
-                                                item-value="id"
-                                                dense
-                                                persistent-placeholder
-                                                outlined
-                                                name="password"
-                                            ></v-autocomplete>
-                                        </v-col>
-                                        <v-col cols="6">
-                                            <v-text-field
-                                                label="Region"
-                                                v-model="patient.region"
-                                                dense
-                                                class="uppercase"
-                                                persistent-placeholder
-                                                outlined
-                                                name="password"
-                                            ></v-text-field>
-                                        </v-col>
-                                        <v-col cols="6">
-                                            <v-text-field
-                                                label="House Address"
-                                                v-model="patient.house_address"
-                                                class="required uppercase"
-                                                dense
-                                                :rules="rules.required"
-                                                persistent-placeholder
-                                                outlined
-                                                name="name"
-                                            ></v-text-field>
-                                        </v-col>
+                                            <v-col cols="6">
+                                                <v-autocomplete
+                                                    label="Municipal"
+                                                    v-model="
+                                                        patient.municipality_id
+                                                    "
+                                                    :items="selectMunicipal"
+                                                    item-text="name"
+                                                    item-value="id"
+                                                    dense
+                                                    persistent-placeholder
+                                                    outlined
+                                                    name="password"
+                                                ></v-autocomplete>
+                                            </v-col>
+                                            <v-col cols="6">
+                                                <v-autocomplete
+                                                    label="Barangay"
+                                                    v-model="
+                                                        patient.barangay_id
+                                                    "
+                                                    :items="selectBarangay"
+                                                    item-text="name"
+                                                    item-value="id"
+                                                    dense
+                                                    persistent-placeholder
+                                                    outlined
+                                                    name="password"
+                                                ></v-autocomplete>
+                                            </v-col>
+                                            <v-col cols="6">
+                                                <v-text-field
+                                                    label="Region"
+                                                    v-model="patient.region"
+                                                    dense
+                                                    class="uppercase"
+                                                    persistent-placeholder
+                                                    outlined
+                                                    name="password"
+                                                ></v-text-field>
+                                            </v-col>
+                                            <v-col cols="6">
+                                                <v-text-field
+                                                    label="House Address"
+                                                    v-model="
+                                                        patient.house_address
+                                                    "
+                                                    class="required uppercase"
+                                                    dense
+                                                    :rules="rules.required"
+                                                    persistent-placeholder
+                                                    outlined
+                                                    name="name"
+                                                ></v-text-field>
+                                            </v-col>
+                                        </template>
                                     </v-row>
                                 </v-col>
-                                <v-col cols="12" lg="12" md="12" sm="12">
-                                    <v-row>
-                                        <v-col cols="12">
-                                            <v-text-field
-                                                label="Complete Address"
-                                                v-model="tempAddressTxt"
-                                                class="required uppercase"
-                                                dense
-                                                :rules="rules.required"
-                                                persistent-placeholder
-                                                outlined
-                                                readonly
-                                                disabled
-                                                name="name"
-                                            ></v-text-field>
-                                        </v-col>
-                                    </v-row>
-                                </v-col>
+                                <template v-if="patient.type_of_patient == 2">
+                                    <v-col cols="12" lg="12" md="12" sm="12">
+                                        <v-row>
+                                            <v-col cols="12">
+                                                <v-text-field
+                                                    label="Complete Address"
+                                                    v-model="tempAddressTxt"
+                                                    class="required uppercase"
+                                                    dense
+                                                    :rules="rules.required"
+                                                    persistent-placeholder
+                                                    outlined
+                                                    readonly
+                                                    disabled
+                                                    name="name"
+                                                ></v-text-field>
+                                            </v-col>
+                                        </v-row>
+                                    </v-col>
+                                </template>
                             </v-row>
                         </v-container>
                     </v-card-text>
