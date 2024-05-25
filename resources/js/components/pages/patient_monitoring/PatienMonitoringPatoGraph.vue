@@ -62,33 +62,33 @@
                                 contain
                                 fill-height
                             ></v-img>
-                            <v-menu
-                                v-model="menu2"
-                                :close-on-content-click="false"
-                                :nudge-right="40"
-                                transition="scale-transition"
-                                offset-y
-                                min-width="auto"
-                            >
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-text-field
-                                        class="mt-3"
-                                        outlined
-                                        dense
-                                        v-model="selectedDate"
-                                        label="Select Date"
-                                        readonly
-                                        v-bind="attrs"
-                                        v-on="on"
-                                    ></v-text-field>
-                                </template>
-                                <v-date-picker
-                                    v-model="selectedDate"
-                                    @input="menu2 = false"
-                                ></v-date-picker>
-                            </v-menu>
-                            <!-- <v-date-picker outlined full-width v-model="selectedDate" label="Select starting date and time" show-titles></v-date-picker> -->
                         </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-menu
+                            v-model="menu2"
+                            :close-on-content-click="false"
+                            :nudge-right="40"
+                            transition="scale-transition"
+                            offset-y
+                            min-width="auto"
+                        >
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-text-field
+                                    outlined
+                                    dense
+                                    v-model="selectedDate"
+                                    label="Select Date"
+                                    readonly
+                                    v-bind="attrs"
+                                    v-on="on"
+                                ></v-text-field>
+                            </template>
+                            <v-date-picker
+                                v-model="selectedDate"
+                                @input="menu2 = false"
+                            ></v-date-picker>
+                        </v-menu>
                     </v-row>
                     <v-row>
                         <v-text-field
