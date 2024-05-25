@@ -20,6 +20,7 @@ class NewBornRecord extends Migration {
             $table->time('time_of_birth');
             $table->string('birth_weight');
             $table->string('birth_lenght');
+            $table->string('impression');
             $table->string('hc');
             $table->string('ac');
             $table->string('cc');
