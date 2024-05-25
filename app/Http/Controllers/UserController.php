@@ -5,17 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
-class UserController extends Controller
-{
+class UserController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         // return User::all();
         return Auth::user();
     }
@@ -25,8 +25,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -36,8 +35,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -47,8 +45,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         return User::find($id);
     }
 
@@ -58,8 +55,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -70,8 +66,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -81,13 +76,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
-    public function change_password_account(Request $req){
-        
-        // return $req;    
+    public function change_password_account(Request $req) {
+
+        // return $req;
         try {
             $user = User::find($req->id);
             $user->password = Hash::make($req->password);
@@ -97,7 +91,7 @@ class UserController extends Controller
             return $e->getMessage();
         }
     }
-    public function change_password(Request $req){
+    public function change_password(Request $req) {
         // return $req;
         $min = 100000;
         $max = 999999;
@@ -114,13 +108,13 @@ class UserController extends Controller
     }
 
 
-    public function verifyAccount(Request $req){
+    public function verifyAccount(Request $req) {
         // return $req;
-        $user = User::where('email',$req->email)->first();
+        $user = User::where('email', $req->email)->first();
         return $user;
     }
 
-    public function send_pin_number(Request $req){
+    public function send_pin_number(Request $req) {
         // return $req;
         $min = 100000;
         $max = 999999;
@@ -139,7 +133,7 @@ class UserController extends Controller
 
 
 
-    public function get_user(Request $req){
+    public function get_user(Request $req) {
         try {
             $users = User::get();
             return $users;
@@ -149,7 +143,7 @@ class UserController extends Controller
     }
 
 
-    public function register_insert(Request $req){
+    public function register_insert(Request $req) {
         // return $req;
         try {
             $user = new User;
@@ -164,9 +158,8 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return $e->getMessage();
         }
-        
     }
-    public function register_update(Request $req){
+    public function register_update(Request $req) {
         // return $req;
         try {
             $user = User::find($req->id);
@@ -181,7 +174,7 @@ class UserController extends Controller
             return $e->getMessage();
         }
     }
-    public function register_delete(Request $req){
+    public function register_delete(Request $req) {
         // return $req;
         try {
             $user = User::find($req->id);
@@ -192,10 +185,10 @@ class UserController extends Controller
         }
     }
 
-    public function create_admin(){
+    public function create_admin() {
         try {
             $users = User::get();
-            if(count($users) < 1){
+            if (count($users) < 1) {
                 $user = new User;
                 $user->name = 'ADMIN';
                 $user->username = 'ADMIN';
@@ -203,15 +196,14 @@ class UserController extends Controller
                 $user->email = 'admin@changeMe.com';
                 $user->save();
                 return 'success';
-            }else{
+            } else {
                 return 'already has admin';
             }
         } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
-    public function saveFile(Request $request)
-    {
+    public function saveFile(Request $request) {
         // return $request;
 
         try {
@@ -220,70 +212,64 @@ class UserController extends Controller
                 list($type, $dataB64) = explode(';', $dataB64);
                 list(, $dataB64)      = explode(',', $dataB64);
                 $file_data = base64_decode($dataB64);
-                
-                \Storage::disk('public')->put($value['name'], $file_data);
- 
+                Storage::disk('public')->put($value['name'], $file_data);
             }
             return 'FILE UPLOADED';
         } catch (\Throwable $th) {
-          return $th;
+            return $th;
         }
- 
     }
-    public function saveFileDatabase(Request $request)
-    {
+    public function saveFileDatabase(Request $request) {
         // return $request;
 
         try {
-            $data = \DB::connection('mysql')->table('files')
-            ->insert([
-                'case_no'=>$request->case_no,
-                'file'=>$request->file,
-                'path'=>$request->path,
-            ]);
+            $data = DB::connection('mysql')->table('files')
+                ->insert([
+                    'case_no' => $request->case_no,
+                    'file' => $request->file,
+                    'path' => $request->path,
+                ]);
             return "save";
         } catch (\Throwable $th) {
-          return $th;
+            return $th;
         }
- 
     }
-    public function getFiles(Request $request)
-    {
+    public function getFiles(Request $request) {
         // return $request;
 
         try {
-            $data = \DB::connection('mysql')->table('files')
-            ->select("*")
-            ->where('case_no', $request->case_no)
-            ->get();
+            $data = DB::connection('mysql')->table('files')
+                ->select("*")
+                ->where('case_no', $request->case_no)
+                ->get();
             return $data;
         } catch (\Throwable $th) {
-          return $th;
+            return $th;
         }
- 
     }
-    public function downloadFiles($file)
-    {
-        // return $request;
+    public function downloadFiles($file) {
+        try {
+            $filePath = storage_path('app/public/' . $file);
 
-        try {
-            return \Storage::disk('public')->download($file);;
+            if (file_exists($filePath)) {
+                return response()->download($filePath);
+            } else {
+                return response()->json(['error' => 'File not found.'], 404);
+            }
         } catch (\Throwable $th) {
-          return $th;
+            return response()->json(['error' => $th->getMessage()], 500);
         }
- 
     }
-    public function deleteFileDatabase(Request $request)
-    {
+
+    public function deleteFileDatabase(Request $request) {
         try {
-            \DB::connection('mysql')->table('files')
+            DB::connection('mysql')->table('files')
                 ->where('id', $request->id)
                 ->delete();
-    
+
             return response()->json(['message' => 'Files deleted successfully'], 200);
         } catch (\Throwable $th) {
             return response()->json(['error' => 'Error deleting files', 'details' => $th->getMessage()], 500);
         }
- 
     }
 }
