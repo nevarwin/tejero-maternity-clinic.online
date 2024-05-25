@@ -1,17 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\PartographModel;
+use Doctrine\DBAL\Query\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-class PartographController extends Controller
-{
-    public function partograph_insert(Request $request){
+class PartographController extends Controller {
+    public function partograph_insert(Request $request) {
         try {
             // return $request;
             DB::beginTransaction();
-            
+
             $partograph = new PartographModel();
             $partograph->hours_ruptured_membranes = $request->hours_ruptured_membranes;
             $partograph->rapid_assesment = $request->rapid_assesment;
@@ -32,31 +33,31 @@ class PartographController extends Controller
             $partograph->maxDuration = $request->maxDuration;
             $partograph->date = $request->date;
             $partograph->time = $request->time;
-            
+
             $partograph->save();
             DB::commit();
             return 'success';
         } catch (\Exception $e) {
             DB::rollBack();
             return $e->getMessage();
-        }catch(\QueryException $q){
+        } catch (QueryException $q) {
             DB::rollBack();
             return $q;
         }
     }
-    public function partograph(Request $request){
+    public function partograph(Request $request) {
         try {
             $case_no = $request->case_no;
-            
+
             $partograph = DB::table('partograph_models')
-                            ->where('case_no', $case_no)
-                            ->get();
-        
+                ->where('case_no', $case_no)
+                ->get();
+
             return $partograph;
         } catch (\Exception $e) {
             DB::rollBack();
             return $e->getMessage();
-        } catch (\QueryException $q) {
+        } catch (QueryException $q) {
             DB::rollBack();
             return $q;
         }
