@@ -18,6 +18,101 @@
                     <v-card-text>
                         <v-container>
                             <v-row style="margin-top: 0px !important">
+                                <v-col lg="12" xl="12">
+                                    <v-row>
+                                        <v-col cols="3">
+                                            <v-select
+                                                label="Type of patient"
+                                                v-model="
+                                                    patient.type_of_patient
+                                                "
+                                                :items="typeOfPatient"
+                                                item-text="name"
+                                                item-value="id"
+                                                dense
+                                                persistent-placeholder
+                                                outlined
+                                                name="password"
+                                            ></v-select>
+                                        </v-col>
+                                        <template
+                                            v-if="patient.type_of_patient == 2"
+                                        >
+                                            <v-col cols="3">
+                                                <v-menu
+                                                    v-model="lmpMenu"
+                                                    :close-on-content-click="
+                                                        false
+                                                    "
+                                                    transition="scale-transition"
+                                                    offset-y
+                                                    max-width="290px"
+                                                    min-width="auto"
+                                                >
+                                                    <template
+                                                        v-slot:activator="{
+                                                            on,
+                                                            attrs,
+                                                        }"
+                                                    >
+                                                        <v-text-field
+                                                            v-model="
+                                                                patient.lmp
+                                                            "
+                                                            label="LMP"
+                                                            class="required uppercase"
+                                                            persistent-placeholder
+                                                            prepend-inner-icon="mdi-calendar"
+                                                            readonly
+                                                            outlined
+                                                            :rules="
+                                                                rules.required
+                                                            "
+                                                            dense
+                                                            v-bind="attrs"
+                                                            v-on="on"
+                                                        ></v-text-field>
+                                                    </template>
+                                                    <v-date-picker
+                                                        v-model="patient.lmp"
+                                                        no-title
+                                                        :max="maxDate"
+                                                        @input="
+                                                            lmpMenu = false;
+                                                            EDCCompute();
+                                                            AOGCompute();
+                                                        "
+                                                    ></v-date-picker>
+                                                </v-menu>
+                                            </v-col>
+                                            <v-col cols="3">
+                                                <v-text-field
+                                                    label="EDC"
+                                                    v-model="patient.edc"
+                                                    class="required uppercase"
+                                                    dense
+                                                    readonly
+                                                    persistent-placeholder
+                                                    :rules="rules.required"
+                                                    outlined
+                                                    name="name"
+                                                    @click="EDCCompute()"
+                                                ></v-text-field>
+                                            </v-col>
+                                            <v-col cols="3">
+                                                <v-text-field
+                                                    label="AOG(weeks)"
+                                                    v-model="patient.aog"
+                                                    class="required uppercase"
+                                                    dense
+                                                    persistent-placeholder
+                                                    outlined
+                                                    name="name"
+                                                ></v-text-field>
+                                            </v-col>
+                                        </template>
+                                    </v-row>
+                                </v-col>
                                 <v-col cols="12" lg="6" md="12" sm="12">
                                     <v-row>
                                         <v-col cols="12">
@@ -284,101 +379,6 @@
                                                 name="name"
                                             ></v-text-field>
                                         </v-col>
-                                    </v-row>
-                                </v-col>
-                                <v-col>
-                                    <v-row>
-                                        <v-col cols="3">
-                                            <v-select
-                                                label="Type of patient"
-                                                v-model="
-                                                    patient.type_of_patient
-                                                "
-                                                :items="typeOfPatient"
-                                                item-text="name"
-                                                item-value="id"
-                                                dense
-                                                persistent-placeholder
-                                                outlined
-                                                name="password"
-                                            ></v-select>
-                                        </v-col>
-                                        <template
-                                            v-if="patient.type_of_patient == 2"
-                                        >
-                                            <v-col cols="3">
-                                                <v-menu
-                                                    v-model="lmpMenu"
-                                                    :close-on-content-click="
-                                                        false
-                                                    "
-                                                    transition="scale-transition"
-                                                    offset-y
-                                                    max-width="290px"
-                                                    min-width="auto"
-                                                >
-                                                    <template
-                                                        v-slot:activator="{
-                                                            on,
-                                                            attrs,
-                                                        }"
-                                                    >
-                                                        <v-text-field
-                                                            v-model="
-                                                                patient.lmp
-                                                            "
-                                                            label="LMP"
-                                                            class="required uppercase"
-                                                            persistent-placeholder
-                                                            prepend-inner-icon="mdi-calendar"
-                                                            readonly
-                                                            outlined
-                                                            :rules="
-                                                                rules.required
-                                                            "
-                                                            dense
-                                                            v-bind="attrs"
-                                                            v-on="on"
-                                                        ></v-text-field>
-                                                    </template>
-                                                    <v-date-picker
-                                                        v-model="patient.lmp"
-                                                        no-title
-                                                        :max="maxDate"
-                                                        @input="
-                                                            lmpMenu = false;
-                                                            EDCCompute();
-                                                            AOGCompute();
-                                                        "
-                                                    ></v-date-picker>
-                                                </v-menu>
-                                            </v-col>
-                                            <v-col cols="3">
-                                                <v-text-field
-                                                    label="EDC"
-                                                    v-model="patient.edc"
-                                                    class="required uppercase"
-                                                    dense
-                                                    readonly
-                                                    persistent-placeholder
-                                                    :rules="rules.required"
-                                                    outlined
-                                                    name="name"
-                                                    @click="EDCCompute()"
-                                                ></v-text-field>
-                                            </v-col>
-                                            <v-col cols="3">
-                                                <v-text-field
-                                                    label="AOG(weeks)"
-                                                    v-model="patient.aog"
-                                                    class="required uppercase"
-                                                    dense
-                                                    persistent-placeholder
-                                                    outlined
-                                                    name="name"
-                                                ></v-text-field>
-                                            </v-col>
-                                        </template>
                                     </v-row>
                                 </v-col>
                             </v-row>
