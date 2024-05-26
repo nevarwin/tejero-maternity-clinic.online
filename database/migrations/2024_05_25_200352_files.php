@@ -18,7 +18,7 @@ class Files extends Migration {
                 $table->id(); // Auto-incrementing primary key
                 $table->longText('path');
                 $table->string('file');
-                $table->integer('case_no');
+                $table->string('case_no');
             }
         );
     }
