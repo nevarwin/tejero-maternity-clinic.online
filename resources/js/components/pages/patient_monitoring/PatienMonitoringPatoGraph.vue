@@ -6,6 +6,7 @@
         <v-simple-table dense>
             <thead>
                 <tr>
+                    <th>Case No</th>
                     <th>Date</th>
                     <th>Time</th>
                     <th>Dilation (cm)</th>
@@ -27,6 +28,7 @@
             </thead>
             <tbody>
                 <tr v-for="(item, index) in case_Partograph" :key="index">
+                    <td>{{ item.case_no }}</td>
                     <td>{{ item.date }}</td>
                     <td>{{ item.time }}</td>
                     <td>{{ item.dilation }}</td>

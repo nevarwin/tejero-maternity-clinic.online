@@ -382,7 +382,11 @@ export default new Vuex.Store({
                 url: "vital_sign",
             })
                 .then((res) => {
-                    state.case_VitalSign = res.data;
+                    state.case_VitalSign = res.data.filter((rec) => {
+                        if (state.case_no == rec.case_no) {
+                            return rec;
+                        }
+                    });
                 })
                 .catch((err) => {
                     console.log(err);
@@ -412,7 +416,12 @@ export default new Vuex.Store({
                 url: "medication_sheet",
             })
                 .then((res) => {
-                    state.case_MedicalSheet = res.data;
+                    state.case_MedicalSheet = res.data.filter((rec) => {
+                        if (state.case_no == rec.case_no) {
+                            return rec;
+                        }
+                    });
+                    // state.case_MedicalSheet = res.data;
                     // console.log(res.data)
                 })
                 .catch((err) => {
@@ -426,7 +435,12 @@ export default new Vuex.Store({
                 url: "new_born",
             })
                 .then((res) => {
-                    state.case_NewBorn = res.data;
+                    state.case_NewBorn = res.data.filter((rec) => {
+                        if (state.case_no == rec.case_no) {
+                            return rec;
+                        }
+                    });
+                    // state.case_NewBorn = res.data;
                     // console.log(res.data)
                 })
                 .catch((err) => {
@@ -440,8 +454,13 @@ export default new Vuex.Store({
                 url: "getFiles",
             })
                 .then((res) => {
-                    state.case_Files = res.data;
-                    console.log(res.data);
+                    state.case_Files = res.data.filter((rec) => {
+                        if (state.case_no == rec.case_no) {
+                            return rec;
+                        }
+                    });
+                    // state.case_Files = res.data;
+                    // console.log(res.data);
                 })
                 .catch((err) => {
                     console.log(err);
