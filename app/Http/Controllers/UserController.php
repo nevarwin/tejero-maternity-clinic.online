@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller {
@@ -225,11 +226,11 @@ class UserController extends Controller {
         try {
             $data = DB::connection('mysql')->table('files')
                 ->insert([
-                    'case_no' => $request->case_no,
-                    'file' => $request->file,
                     'path' => $request->path,
+                    'file' => $request->file,
+                    'case_no' => $request->case_no,
                 ]);
-            return "save";
+            return $data;
         } catch (\Throwable $th) {
             return $th;
         }
