@@ -22,8 +22,6 @@ use App\Http\Controllers\NewBornController;
 use App\Http\Controllers\PartographController;
 use App\Http\Controllers\auditController;
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,36 +33,36 @@ use App\Http\Controllers\auditController;
 |
 */
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 Route::middleware('guest')->group(function () {
-    Route::get('/',function(){
+    Route::get('/', function () {
         return view('auth.login');
     });
-    Route::get('/about',function(){
+    Route::get('/about', function () {
         return view('auth.about');
     });
-    Route::get('/login2',function(){
+    Route::get('/login2', function () {
         return view('auth.index');
     });
-    Route::get('/medcert_form',function(){
+    Route::get('/medcert_form', function () {
         return view('auth.medcert');
     });
-    Route::get('/request_document',function(){
+    Route::get('/request_document', function () {
         return view('auth.login');
     });
-    Route::get('/tae',function(){
+    Route::get('/tae', function () {
         return 'take';
     });
-    Route::post('/system_insert',[SystemConfigurationController::class, 'system_insert']);
-    Route::get('/get_system_data',[SystemConfigurationController::class, 'get_system_data']);
+    Route::post('/system_insert', [SystemConfigurationController::class, 'system_insert']);
+    Route::get('/get_system_data', [SystemConfigurationController::class, 'get_system_data']);
     Route::post('/insert_address', [AddressController::class, 'insert_address']);
 
-    Route::post('/verify_account',[UserController::class, 'verifyAccount']);
+    Route::post('/verify_account', [UserController::class, 'verifyAccount']);
     Route::get('/create_admin', [UserController::class, 'create_admin']);
 });
 
-Route::middleware(['auth'])->group(function() {
-    /*  
+Route::middleware(['auth'])->group(function () {
+    /*
     |
     | Some Routes needed to be before the route with "{any?}" parameter.
     | So that it will be found first, after entering the route.
@@ -72,13 +70,13 @@ Route::middleware(['auth'])->group(function() {
     */
 
     Route::get('/auth-user', [AuthenticatedSessionController::class, 'show']);
-    Route::get('/get_user', [UserController::class, 'index'] );
+    Route::get('/get_user', [UserController::class, 'index']);
 
     Route::post('/register_insert', [UserController::class, 'register_insert']);
     Route::post('/register_update', [UserController::class, 'register_update']);
     Route::post('/register_delete', [UserController::class, 'register_delete']);
-    Route::post('/getFiles',[UserController::class, 'getFiles']);
-    Route::post('/deleteFileDatabase',[UserController::class, 'deleteFileDatabase']);
+    Route::post('/getFiles', [UserController::class, 'getFiles']);
+    Route::post('/deleteFileDatabase', [UserController::class, 'deleteFileDatabase']);
 
     Route::get('/downloadFiles/{file}', [UserController::class, 'downloadFiles']);
 
@@ -111,7 +109,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/get_patient', [PatientController::class, 'get_patient']);
     Route::post('/patient_update', [PatientController::class, 'patient_update']);
     Route::post('/patient_delete', [PatientController::class, 'patient_delete']);
-    
+
 
     // Patient monitor route
 
@@ -124,7 +122,7 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/medication_sheet_insert', [MedicalSheetController::class, 'medication_sheet_insert']);
     Route::post('/medication_sheet', [MedicalSheetController::class, 'medication_sheet']);
     Route::post('/medication_sheet_update', [MedicalSheetController::class, 'medication_sheet_update']);
-    
+
     //NEW BORN
     Route::post('/new_born_insert', [NewBornController::class, 'new_born_insert']);
     Route::post('/new_born', [NewBornController::class, 'new_born']);
@@ -140,7 +138,4 @@ Route::middleware(['auth'])->group(function() {
 
 
     Route::get('/{any?}', [SpaController::class, 'index'])->where('any', '.*');
-
-
-
 });
