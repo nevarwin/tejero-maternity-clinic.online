@@ -158,7 +158,7 @@ export default {
         async sendEmail() {
             if (this.validate()) {
                 try {
-                    const response = await axios.post("api/mail/medcert", {
+                    const emailResponse = await axios.post("api/mail/medcert", {
                         to: this.toEmail,
                         name: this.details.full_name,
                         doctors_name: this.details.doctors_name,
@@ -166,8 +166,17 @@ export default {
                         case_number: this.details.case_number,
                         description: this.details.description,
                     });
+
+                    const dbResponse = await axios.post("api/medcert", {
+                        full_name: this.details.full_name,
+                        doctors_name: this.details.doctors_name,
+                        contact_number: this.details.contact_number,
+                        case_number: this.details.case_number,
+                        description: this.details.description,
+                    });
+
                     this.snackbar.show = true;
-                    this.snackbar.text = "Email Sent";
+                    this.snackbar.text = "Email Sent and Request Saved";
                     this.snackbar.color = "success";
                     this.details = {
                         full_name: "",
