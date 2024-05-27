@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Mail\MedCert;
 use App\Models\MedicalCertRequest;
+use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 
@@ -12,7 +13,7 @@ class MedicalCertRequestController extends Controller {
         try {
             DB::beginTransaction();
             $medcerts = DB::table('medical_cert_requests')
-                ->select('id', 'full_name', 'doctors_name', 'contact_number', 'case_number', 'description', 'created_at', 'updated_at')
+                ->select('id', 'full_name', 'doctors_name', 'contact_number', 'case_number', 'description', 'created_at', 'updated_at', 'status')
                 ->orderBy('id', 'DESC')
                 ->get();
             DB::commit();
