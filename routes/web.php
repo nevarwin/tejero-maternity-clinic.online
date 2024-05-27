@@ -137,6 +137,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/audit', [auditController::class, 'audit']);
 
     Route::get('/get_medcert', [MedicalCertRequestController::class, 'get_medcert']);
+    Route::post('/medcert_update', [MedicalCertRequestController::class, 'updateStatus']);
 
 
     Route::get('/{any?}', [SpaController::class, 'index'])->where('any', '.*');
