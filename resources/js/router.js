@@ -23,6 +23,7 @@ import audit_trail from "./components/pages/audit_trail/audit_trail.vue";
 import patient_history from "./components/pages/audit_trail/patient_history.vue";
 
 import file from "./components/pages/file.vue";
+import MedCertPage from "./components/pages/medcertrequest/MedCertPage.vue";
 
 export default new VueRouter({
     mode: "history",
@@ -40,15 +41,6 @@ export default new VueRouter({
             name: "login_option",
             component: LoginOption,
         },
-        
-        // {
-        // path: "/tejeroLogin2",
-        // component: Stackoverflow,
-        //     beforeEnter(to, from, next) {
-        //       window.location.href = "https://tejero-maternity-clinic.online/login2";
-        //     }
-        // },
-        
         {
             path: "/request_document",
             name: "request_document",
@@ -86,6 +78,12 @@ export default new VueRouter({
             path: "/admission",
             name: "admission",
             component: AdmissionPage,
+        },
+
+        {
+            path: "/medcert_request_list",
+            name: "medcert_request_list",
+            component: MedCertPage,
         },
 
         // Master
