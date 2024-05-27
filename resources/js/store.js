@@ -116,6 +116,7 @@ export default new Vuex.Store({
         case_NewBorn: [],
         case_Partograph: [],
         case_Files: [],
+        medcertData: [],
     },
 
     actions: {
@@ -249,6 +250,22 @@ export default new Vuex.Store({
                     console.log(err);
                 });
         },
+        getMedCert({ commit }) {
+            axios({
+                method: "get",
+                url: "get_medcert", // Update the URL to fetch medcert data
+            })
+                .then((res) => {
+                    // Commit the medcert data to the store using the correct mutation
+                    commit("setMedCertData", res.data);
+                    console.log(res.data, "MedCert data");
+                    console.log(setMedCertData, "MedCert data");
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+
         getVitalSign({ commit, state }) {
             axios({
                 method: "post",
@@ -480,6 +497,11 @@ export default new Vuex.Store({
         },
         setFile(state, payload) {
             state.case_Files = payload;
+        },
+        setMedCertData(state, payload) {
+            state.medcertData = payload;
+            console.log("Mutation payload:", payload);
+            console.log("Updated state:", state.medCertData);
         },
     },
     getters: {},
