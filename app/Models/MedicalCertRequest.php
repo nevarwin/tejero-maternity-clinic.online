@@ -13,6 +13,7 @@ class MedicalCertRequest extends Model {
         'doctors_name',
         'contact_number',
         'case_number',
-        'description'
+        'description',
+        'status',
     ];
 }
