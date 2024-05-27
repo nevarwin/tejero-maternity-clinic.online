@@ -265,7 +265,6 @@ export default new Vuex.Store({
                     console.log(err);
                 });
         },
-
         getVitalSign({ commit, state }) {
             axios({
                 method: "post",
@@ -500,10 +499,7 @@ export default new Vuex.Store({
         },
         setMedCertData(state, payload) {
             state.medcertData = payload;
-            console.log("Mutation payload:", payload);
-            console.log("Updated state:", state.medCertData);
         },
     },
-    getters: {},
     plugins: [persistedData],
 });
