@@ -21,6 +21,7 @@ use App\Http\Controllers\MedicalSheetController;
 use App\Http\Controllers\NewBornController;
 use App\Http\Controllers\PartographController;
 use App\Http\Controllers\auditController;
+use App\Http\Controllers\MedicalCertRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -135,6 +136,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/audit_insert', [auditController::class, 'audit_insert']);
     Route::post('/audit', [auditController::class, 'audit']);
 
+    Route::get('/get_medcert', [MedicalCertRequestController::class, 'get_medcert']);
 
 
     Route::get('/{any?}', [SpaController::class, 'index'])->where('any', '.*');
