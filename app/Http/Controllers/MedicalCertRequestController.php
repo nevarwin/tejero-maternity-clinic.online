@@ -7,6 +7,7 @@ use App\Models\MedicalCertRequest;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class MedicalCertRequestController extends Controller {
     public function get_medcert(Request $request) {
@@ -45,5 +46,36 @@ class MedicalCertRequestController extends Controller {
         $medCertRequest = MedicalCertRequest::create($request->all());
 
         return response()->json(['message' => 'Request saved successfully', 'data' => $medCertRequest], 201);
+    }
+
+    public function updateStatus(Request $request) {
+        // Log the incoming request data
+        Log::info('Request Data: ', $request->all());
+
+        // Validate the incoming request data
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:medical_cert_requests,id', // Adjust table name as needed
+            'status' => 'required|string'
+        ]);
+
+        // Log the validated data
+        Log::info('Validated Data: ', $validated);
+
+        try {
+            // Find the medcert by id
+            $medCert = MedicalCertRequest::find($validated['id']);
+            if (!$medCert) {
+                return response()->json(['message' => 'Medical certificate not found'], 404);
+            }
+
+            // Update the status
+            $medCert->status = $validated['status'];
+            $medCert->save();
+
+            return response()->json(['message' => 'Status updated successfully'], 200);
+        } catch (\Exception $e) {
+            Log::error('Error updating status: ', ['error' => $e->getMessage()]);
+            return response()->json(['message' => 'Internal Server Error'], 500);
+        }
     }
 }
