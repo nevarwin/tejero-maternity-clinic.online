@@ -32,7 +32,7 @@
                             ? "Single"
                             : item.civil_status_id === 2
                             ? "Married"
-                            : "Widow"
+                            : ""
                     }}
                 </td>
             </template>
