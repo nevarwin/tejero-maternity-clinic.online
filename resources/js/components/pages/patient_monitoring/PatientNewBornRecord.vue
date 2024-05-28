@@ -1,7 +1,6 @@
 <template>
     <v-container class="container-main pt-0 pl-0" fluid>
         <v-card>
-            <!-- {{case_NewBorn}} -->
             <v-simple-table dense class="overflow-auto">
                 <thead>
                     <tr>
@@ -24,7 +23,7 @@
                         <th>Date of Birth</th>
                         <th>Time of Birth</th>
                         <th>Birth Weight</th>
-                        <th>Birth Lenght</th>
+                        <th>Birth Length</th>
                         <th>H.C</th>
                         <th>A.C</th>
                         <th>C.C</th>
@@ -43,8 +42,8 @@
                         <td v-show="editMode">{{ new_born.id }}</td>
                         <td>{{ new_born.case_no }}</td>
                         <td>{{ changeTimeformat(new_born.created_at) }}</td>
-                        <td>{{ new_born.time_of_birth }}</td>
                         <td>{{ new_born.date_of_birth }}</td>
+                        <td>{{ new_born.time_of_birth }}</td>
                         <td>{{ new_born.birth_weight }}</td>
                         <td>{{ new_born.birth_lenght }}</td>
                         <td>{{ new_born.hc }}</td>
@@ -70,12 +69,12 @@
             </v-simple-table>
             <br />
             <v-row class="ml-10">
-                <v-col class="mb-2" xs="12" md="6">
-                    CODE: 0 - No Abnormality
-                </v-col>
-                <v-col class="mb-2" xs="12" md="6">
-                    X - Abnormality (describe abnormality)
-                </v-col>
+                <v-col class="mb-2" xs="12" md="6"
+                    >CODE: 0 - No Abnormality</v-col
+                >
+                <v-col class="mb-2" xs="12" md="6"
+                    >X - Abnormality (describe abnormality)</v-col
+                >
             </v-row>
             <insert-dialog
                 :newBornRecord="newBornRecord"
@@ -116,9 +115,7 @@ export default {
         },
     },
     components: {
-        // 'toolbar':ToolbarComponent,
         "float-action": FloatAction,
-        // 'agree-dialog':AgreeDialog,
         "insert-dialog": NewBordRecordDialog,
         "edit-dialog": NewBordRecordDialog,
         snackbar: SnackBar,
@@ -143,7 +140,19 @@ export default {
                 color: "success",
                 text: null,
             },
-            newBornRecord: {
+            newBornRecord: this.getInitialNewBornRecord(),
+            insertDialog: false,
+            editDialog: false,
+            editMode: false,
+            tableHeight: window.innerHeight - 180,
+            tempEditVitalsign: {},
+        };
+    },
+    methods: {
+        // ...mapActions(['getNewBorn']),
+
+        getInitialNewBornRecord() {
+            return {
                 patient_id: this.case_data.patient_id,
                 case_no: this.case_data.case_no,
                 date_of_birth: "",
@@ -168,32 +177,14 @@ export default {
                 anus: "",
                 reflexes: "",
                 impression: "",
-            },
-            insertDialog: false,
-            editDialog: false,
-            editMode: false,
-            tableHeight: window.innerHeight - 180,
-            tempEditVitalsign: {},
-        };
-    },
-    methods: {
-        // ...mapActions(['getNewBorn']),
+            };
+        },
 
         toggleInsertDialog() {
+            this.newBornRecord = this.getInitialNewBornRecord();
             this.insertDialog = true;
         },
         toggleEditMode(val) {
-            //   console.log(val,"129")
-            //  this.vitalSign ={
-            //         time:moment().format("HH:mm:ss"),
-            //         case_no: parseInt(this.case_data.case_no),
-            //         blood_presure:null,
-            //         temperature:null,
-            //         pulse_rate:null,
-            //         respiratory_rate:null,
-            //         fetal_heart_tone:null,
-            //         internal_examination:null
-            //     }
             this.editMode = !this.editMode;
         },
         Edit(data) {
@@ -211,11 +202,12 @@ export default {
                     this.snackbar.show = true;
                     this.snackbar.text = "Success Insert";
                     this.snackbar.color = "success";
-                    // this.$refs.Insert.resetValidation()
-                    // this.commit('getNewBorn')
                     this.$store.dispatch("getNewBorn");
+
+                    // Reset newBornRecord to its initial state
+                    this.newBornRecord = this.getInitialNewBornRecord();
+
                     this.insertDialog = false;
-                    // this.get_new_born
                 })
                 .catch((err) => {
                     console.log(err);
@@ -232,8 +224,6 @@ export default {
                     this.snackbar.show = true;
                     this.snackbar.text = "Success Update";
                     this.snackbar.color = "success";
-                    // this.$refs.Insert.resetValidation()
-                    // this.getNewBorn()
                     this.$store.dispatch("getNewBorn");
                     this.editDialog = false;
                 })
@@ -317,5 +307,3 @@ export default {
     // },
 };
 </script>
-
-<style></style>

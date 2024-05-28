@@ -36,7 +36,6 @@
                             >
                         </td>
                         <td v-show="editMode">{{ medical_sheet.id }}</td>
-
                         <td>{{ medical_sheet.case_no }}</td>
                         <td>{{ medical_sheet.date }}</td>
                         <td>{{ medical_sheet.medication_dosage }}</td>
@@ -84,9 +83,7 @@ export default {
         },
     },
     components: {
-        // 'toolbar':ToolbarComponent,
         "float-action": FloatAction,
-        // 'agree-dialog':AgreeDialog,
         "insert-dialog": PatientMedicationSheetAdd,
         "edit-dialog": PatientMedicationSheetAdd,
         snackbar: SnackBar,
@@ -111,13 +108,7 @@ export default {
                 color: "success",
                 text: null,
             },
-            medication_sheet: {
-                date: moment().format("YYYY-MM-DD"),
-                case_no: this.case_data.case_no,
-                medication_dosage: "",
-                hours: "",
-                stat_medication: "",
-            },
+            medication_sheet: this.getInitialMedicationSheet(),
             insertDialog: false,
             editDialog: false,
             editMode: false,
@@ -126,27 +117,26 @@ export default {
         };
     },
     methods: {
-        ...mapActions([""]),
+        ...mapActions([]),
+
+        getInitialMedicationSheet() {
+            return {
+                date: moment().format("YYYY-MM-DD"),
+                case_no: this.case_data.case_no,
+                medication_dosage: "",
+                hours: "",
+                stat_medication: "",
+            };
+        },
 
         toggleInsertDialog() {
+            this.medication_sheet = this.getInitialMedicationSheet();
             this.insertDialog = true;
         },
         toggleEditMode(val) {
-            //   console.log(val,"129")
-            //  this.vitalSign ={
-            //         time:moment().format("HH:mm:ss"),
-            //         case_no: parseInt(this.case_data.case_no),
-            //         blood_presure:null,
-            //         temperature:null,
-            //         pulse_rate:null,
-            //         respiratory_rate:null,
-            //         fetal_heart_tone:null,
-            //         internal_examination:null
-            //     }
             this.editMode = !this.editMode;
         },
         Edit(data) {
-            //   console.log(data)
             this.tempEditMedicalsheet = structuredClone(data);
             this.editDialog = true;
         },
@@ -161,9 +151,11 @@ export default {
                     this.snackbar.show = true;
                     this.snackbar.text = "Success Insert";
                     this.snackbar.color = "success";
-                    // this.$refs.Insert.resetValidation()
-                    // this.getMedicalSheet()
                     this.$store.dispatch("getMedicalSheet");
+
+                    // Reset medication_sheet to its initial state
+                    this.medication_sheet = this.getInitialMedicationSheet();
+
                     this.insertDialog = false;
                 })
                 .catch((err) => {
@@ -171,7 +163,6 @@ export default {
                 });
         },
         Update() {
-            this.loadMore = true;
             axios({
                 method: "post",
                 url: "medication_sheet_update",
@@ -182,8 +173,6 @@ export default {
                     this.snackbar.show = true;
                     this.snackbar.text = "Success Update";
                     this.snackbar.color = "success";
-                    // this.$refs.Insert.resetValidation()
-                    // this.getMedicalSheet()
                     this.$store.dispatch("getMedicalSheet");
                     this.editDialog = false;
                 })
@@ -196,10 +185,7 @@ export default {
         ...mapState(["case_MedicalSheet", "case_no"]),
     },
     mounted() {
-        // this.getMedicalSheet()
         console.log(this.case_no);
     },
 };
 </script>
-
-<style></style>

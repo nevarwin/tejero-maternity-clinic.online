@@ -39,7 +39,6 @@
                             >
                         </td>
                         <td v-show="editMode">{{ vital_sign.id }}</td>
-
                         <td>{{ vital_sign.case_no }}</td>
                         <td>{{ vital_sign.time }}</td>
                         <td>{{ vital_sign.blood_presure }}</td>
@@ -90,9 +89,7 @@ export default {
         },
     },
     components: {
-        // 'toolbar':ToolbarComponent,
         "float-action": FloatAction,
-        // 'agree-dialog':AgreeDialog,
         "insert-dialog": VitalSignDialog,
         "edit-dialog": VitalSignDialog,
         snackbar: SnackBar,
@@ -117,16 +114,7 @@ export default {
                 color: "success",
                 text: null,
             },
-            vitalSign: {
-                time: moment().format("HH:mm:ss"),
-                case_no: this.case_data.case_no,
-                blood_presure: "",
-                temperature: "",
-                pulse_rate: "",
-                respiratory_rate: "",
-                fetal_heart_tone: "",
-                internal_examination: "",
-            },
+            vitalSign: this.getInitialVitalSign(),
             insertDialog: false,
             editDialog: false,
             editMode: false,
@@ -137,21 +125,24 @@ export default {
     methods: {
         ...mapActions([]),
 
+        getInitialVitalSign() {
+            return {
+                time: moment().format("HH:mm:ss"),
+                case_no: this.case_data.case_no,
+                blood_presure: "",
+                temperature: "",
+                pulse_rate: "",
+                respiratory_rate: "",
+                fetal_heart_tone: "",
+                internal_examination: "",
+            };
+        },
+
         toggleInsertDialog() {
+            this.vitalSign = this.getInitialVitalSign();
             this.insertDialog = true;
         },
         toggleEditMode(val) {
-            //   console.log(val,"129")
-            //  this.vitalSign ={
-            //         time:moment().format("HH:mm:ss"),
-            //         case_no: parseInt(this.case_data.case_no),
-            //         blood_presure:null,
-            //         temperature:null,
-            //         pulse_rate:null,
-            //         respiratory_rate:null,
-            //         fetal_heart_tone:null,
-            //         internal_examination:null
-            //     }
             this.editMode = !this.editMode;
         },
         Edit(data) {
@@ -169,9 +160,10 @@ export default {
                     this.snackbar.show = true;
                     this.snackbar.text = "Success Insert";
                     this.snackbar.color = "success";
-                    // this.$refs.Insert.resetValidation()
-                    // this.getVitalSign()
                     this.$store.dispatch("getVitalSign");
+
+                    // Reset vitalSign to its initial state
+                    this.vitalSign = this.getInitialVitalSign();
 
                     this.insertDialog = false;
                 })
@@ -180,7 +172,6 @@ export default {
                 });
         },
         Update() {
-            this.loadMore = true;
             axios({
                 method: "post",
                 url: "vital_sign_update",
@@ -191,8 +182,6 @@ export default {
                     this.snackbar.show = true;
                     this.snackbar.text = "Success Update";
                     this.snackbar.color = "success";
-                    // this.$refs.Insert.resetValidation()
-                    // this.getVitalSign()
                     this.$store.dispatch("getVitalSign");
                     this.editDialog = false;
                 })
@@ -205,10 +194,8 @@ export default {
         ...mapState(["case_VitalSign", "case_no"]),
     },
     mounted() {
-        console.log(this.case_VitalSign, "vital");
-        console.log(this.case_no);
+        console.log(this.case_data.case_no, "vital");
+        console.log(data.case_no);
     },
 };
 </script>
-
-<style></style>
