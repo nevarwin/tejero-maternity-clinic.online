@@ -184,11 +184,7 @@ export default {
             console.log("test");
         },
         patientRequest() {
-            // setTimeout(() => {
-            // window.location.reload()
-            console.log("toto");
-            this.$router.push("/");
-            // }, 1000);
+            this.$router.go(-1);
         },
         resetForm() {
             if (this.$refs.LoginForm) {
