@@ -72,6 +72,7 @@
                                 label="Attachment"
                                 multiple
                                 v-model="attachment"
+                                accept=".jpg,.jpeg,.pdf"
                                 @change="saveFile(attachment)"
                             />
                             <v-card-actions>
