@@ -31,7 +31,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(new_born, index) in case_NewBorn" :key="index">
+                    <tr
+                        v-for="(new_born, index) in filteredNewBorn"
+                        :key="index"
+                    >
                         <td v-show="editMode">
                             <v-icon color="success" @click="Edit(new_born)"
                                 >mdi-pencil</v-icon
@@ -244,10 +247,15 @@ export default {
     },
     computed: {
         ...mapState(["case_NewBorn"]),
+        filteredNewBorn() {
+            if (!this.case_NewBorn) return [];
+            return this.case_NewBorn;
+        },
         get_new_born() {
+            let new_born_info = [];
             for (let i = 0; i < this.case_NewBorn.length; i++) {
                 const element = this.case_NewBorn[i];
-                let new_born_info = [
+                new_born_info.push(
                     {
                         question:
                             "General Appearance(maturity,activity,tone,cry,color,edema)",
@@ -255,7 +263,7 @@ export default {
                     },
                     {
                         question: "Skin(inertia,rashes,hematoma)",
-                        answer: element.general_aperance,
+                        answer: element.skin,
                     },
                     {
                         question:
@@ -298,10 +306,10 @@ export default {
                         question: "Reflexes (grasp, sucking, swallowing)",
                         answer: element.reflexes,
                     },
-                    { question: "Impression", answer: element.impression },
-                ];
-                return new_born_info;
+                    { question: "Impression", answer: element.impression }
+                );
             }
+            return new_born_info;
         },
     },
     // mounted(){
