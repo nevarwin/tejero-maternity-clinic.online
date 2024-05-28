@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Religion;
 use Illuminate\Support\Facades\DB;
 
-class ReligionController extends Controller
-{
-    public function religion_insert(Request $request){
+class ReligionController extends Controller {
+    public function religion_insert(Request $request) {
         try {
             // return $request;
             DB::beginTransaction();
@@ -20,34 +19,33 @@ class ReligionController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return $e->getMessage();
-        }catch(\QueryException $q){
+        } catch (\QueryException $q) {
             DB::rollBack();
             return $q;
         }
-        
     }
 
-    public function get_religion(Request $request){
+    public function get_religion(Request $request) {
         try {
             DB::beginTransaction();
             $religions = Religion::select(
                 'id',
                 'name',
             )
-            ->get();
+                ->get();
             return $religions;
             DB::commit();
             return 'success';
         } catch (\Exception $e) {
             DB::rollBack();
             return $e->getMessage();
-        }catch(\QueryException $q){
+        } catch (\QueryException $q) {
             DB::rollBack();
             return $q;
         }
     }
 
-    public function religion_update(Request $request){
+    public function religion_update(Request $request) {
         try {
             // return $request;
             DB::beginTransaction();
@@ -59,13 +57,12 @@ class ReligionController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return $e->getMessage();
-        }catch(\QueryException $q){
+        } catch (\QueryException $q) {
             DB::rollBack();
             return $q;
         }
-        
     }
-    public function religion_delete(Request $request){
+    public function religion_delete(Request $request) {
         try {
             // return $request;
             DB::beginTransaction();
@@ -76,10 +73,9 @@ class ReligionController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return $e->getMessage();
-        }catch(\QueryException $q){
+        } catch (\QueryException $q) {
             DB::rollBack();
             return $q;
         }
-        
     }
 }
