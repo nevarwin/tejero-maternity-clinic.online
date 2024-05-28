@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\NewBorn;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-class NewBornController extends Controller
-{
+class NewBornController extends Controller {
     //INSERT
-    public function new_born_insert(Request $request){
+    public function new_born_insert(Request $request) {
         try {
             DB::beginTransaction();
-            
+
             $new_born_record = new NewBorn();
             $new_born_record->patient_id = $request->patient_id;
             $new_born_record->case_no = $request->case_no;
@@ -38,20 +38,20 @@ class NewBornController extends Controller
             $new_born_record->anus = $request->anus;
             $new_born_record->reflexes = $request->reflexes;
             $new_born_record->impression = $request->impression;
-            
+
             $new_born_record->save();
             DB::commit();
             return 'success';
         } catch (\Exception $e) {
             DB::rollBack();
             return $e->getMessage();
-        }catch(\QueryException $q){
+        } catch (QueryException $q) {
             DB::rollBack();
             return $q;
         }
     }
     //UPDATE
-    public function new_born_update(Request $request){
+    public function new_born_update(Request $request) {
         try {
             // return $request;
             DB::beginTransaction();
@@ -79,34 +79,33 @@ class NewBornController extends Controller
             $new_born_record->anus = $request->anus;
             $new_born_record->reflexes = $request->reflexes;
             $new_born_record->impression = $request->impression;
-            
+
             $new_born_record->save();
             DB::commit();
             return 'success';
         } catch (\Exception $e) {
             DB::rollBack();
             return $e->getMessage();
-        }catch(\QueryException $q){
+        } catch (QueryException $q) {
             DB::rollBack();
             return $q;
         }
-        
     }
     //GET
-    public function new_born(Request $request){
+    public function new_born(Request $request) {
         try {
             // return $request;
-            $case_no = intval($request->case_no);
+            $case_no = $request->case_no;
             $new_born = NewBorn::select(
                 'new_borns.*'
             )
-            ->where('case_no', '=', $case_no)    
-            ->get();
+                ->where('case_no', $case_no)
+                ->get();
             return $new_born;
         } catch (\Exception $e) {
             DB::rollBack();
             return $e->getMessage();
-        }catch(\QueryException $q){
+        } catch (QueryException $q) {
             DB::rollBack();
             return $q;
         }
