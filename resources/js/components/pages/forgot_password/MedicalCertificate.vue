@@ -89,18 +89,6 @@
                                     </v-btn>
                                 </v-col>
                             </v-row>
-                            <v-row>
-                                <v-col>
-                                    <v-btn
-                                        dense
-                                        @click="goBack"
-                                        block
-                                        color="primary"
-                                    >
-                                        Back
-                                    </v-btn>
-                                </v-col>
-                            </v-row>
                         </v-card-text>
                     </v-card>
                 </v-col>

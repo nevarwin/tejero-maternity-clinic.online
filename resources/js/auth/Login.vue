@@ -102,8 +102,12 @@
                                         name="password"
                                         :rules="rules.password"
                                     ></v-text-field>
-                                    <v-row>
-                                        <v-col cols="12" sm="6">
+                                    <v-row justify="center">
+                                        <v-col
+                                            cols="12"
+                                            sm="6"
+                                            class="d-flex justify-center align-center"
+                                        >
                                             <router-link to="/forgot_password">
                                                 <span
                                                     @click="forgetPassword()"
@@ -111,34 +115,23 @@
                                                         color: blue;
                                                         cursor: pointer;
                                                     "
-                                                    >Forgot password?</span
                                                 >
+                                                    Forgot password?
+                                                </span>
                                             </router-link>
                                         </v-col>
-                                        <!-- <v-col cols="12" sm="6">
-                                            <router-link to="/medcert_form">
-                                                <span
-                                                    style="
-                                                        color: blue;
-                                                        cursor: pointer;
-                                                    "
-                                                    >Request Medical
-                                                    Certificate</span
-                                                >
-                                            </router-link>
-                                        </v-col> -->
                                     </v-row>
 
                                     <v-divider></v-divider>
 
                                     <v-card-actions>
-                                        <v-btn
+                                        <!-- <v-btn
                                             small
                                             color="success"
                                             @click="patientRequest"
                                         >
                                             <v-icon>mdi-arrow-left</v-icon>
-                                        </v-btn>
+                                        </v-btn> -->
                                         <v-spacer></v-spacer>
                                         <v-btn
                                             small
@@ -183,9 +176,9 @@ export default {
         forgetPassword() {
             console.log("test");
         },
-        patientRequest() {
-            this.$router.go(-1);
-        },
+        // patientRequest() {
+        //     this.$router.push("/");
+        // },
         resetForm() {
             if (this.$refs.LoginForm) {
                 this.$refs.LoginForm.reset();

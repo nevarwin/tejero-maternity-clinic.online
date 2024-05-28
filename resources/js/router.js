@@ -36,11 +36,11 @@ export default new VueRouter({
             name: "login",
             component: Login,
         },
-        {
-            path: "/",
-            name: "login_option",
-            component: LoginOption,
-        },
+        // {
+        //     path: "/login",
+        //     name: "landing_page",
+        //     component: Login,
+        // },
         {
             path: "/request_document",
             name: "request_document",
