@@ -240,6 +240,7 @@ export default {
     data: () => ({
         snackbarTimeout: 3000,
         dialogBtn: false,
+        menu: false,
     }),
     methods: {
         closeDialog() {
