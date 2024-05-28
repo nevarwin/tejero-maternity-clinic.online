@@ -14,7 +14,11 @@
                             </template>
                             <v-card-title
                                 class="justify-center py-8"
-                                style="font-size: 14; text-align:justify; white-space: normal"
+                                style="
+                                    font-size: 14;
+                                    text-align: justify;
+                                    white-space: normal;
+                                "
                             >
                                 <v-row align="center">
                                     <v-col cols="12" sm="4">
@@ -34,7 +38,7 @@
                                                 <v-col cols="12">
                                                     <span class="display-1"
                                                         >Tejero Medical
-                                                        <br>
+                                                        <br />
                                                         Maternity Clinic</span
                                                     >
                                                 </v-col>
@@ -111,7 +115,7 @@
                                                 >
                                             </router-link>
                                         </v-col>
-                                        <v-col cols="12" sm="6">
+                                        <!-- <v-col cols="12" sm="6">
                                             <router-link to="/medcert_form">
                                                 <span
                                                     style="
@@ -122,7 +126,7 @@
                                                     Certificate</span
                                                 >
                                             </router-link>
-                                        </v-col>
+                                        </v-col> -->
                                     </v-row>
 
                                     <v-divider></v-divider>
@@ -180,11 +184,7 @@ export default {
             console.log("test");
         },
         patientRequest() {
-            // setTimeout(() => {
-            // window.location.reload()
-            console.log("toto");
-            this.$router.push("/");
-            // }, 1000);
+            this.$router.go(-1);
         },
         resetForm() {
             if (this.$refs.LoginForm) {

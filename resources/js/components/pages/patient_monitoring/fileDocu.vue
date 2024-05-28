@@ -22,7 +22,7 @@
                     <v-simple-table>
                         <thead>
                             <tr>
-                                <th>files</th>
+                                <th>Files</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -47,7 +47,7 @@
                                         @click="deleteFile(item)"
                                     >
                                         <v-icon>mdi-delete</v-icon>
-                                        </v-btn>
+                                    </v-btn>
                                 </td>
                             </tr>
                         </tbody>
@@ -72,6 +72,7 @@
                                 label="Attachment"
                                 multiple
                                 v-model="attachment"
+                                accept=".jpg,.jpeg,.pdf"
                                 @change="saveFile(attachment)"
                             />
                             <v-card-actions>
@@ -128,8 +129,11 @@ export default {
     methods: {
         async saveFile(value) {
             let extension = value[0].name.split(".");
-            console.log(extension[1]);
-            if (extension[1] == "jpg" || extension[1] == "pdf") {
+            if (
+                extension[1] == "jpg" ||
+                extension[1] == "pdf" ||
+                extension[1] == "jpeg"
+            ) {
                 if (value) {
                     value.forEach(async (item) => {
                         const reader = new FileReader();
@@ -164,7 +168,7 @@ export default {
                         .post("api/saveFileDatabase", {
                             case_no: this.case_data.case_no,
                             file: fileAttach,
-                            path: "C:/Apache24/htdocs/clinic_system/storage/app/public/clinic_files",
+                            path: "./storage/public/storage/clinic_files",
                         })
                         .then(() => {
                             this.snackbar.show = true;
@@ -181,29 +185,27 @@ export default {
             // console.log(val)
             window.open(`downloadFiles/${val}`, "_blank");
         },
-        deleteFile(val){
-            console.log(val)
-            
-                let confirmed = confirm("Are you sure you to delete?")
+        deleteFile(val) {
+            console.log(val);
 
-                if(confirmed){
-                    axios({
-                method: "POST",
-                url: "deleteFileDatabase",
-                data:{id:val.id}
-            }).then(()=>{
-                this.snackbar.show = true;
-                            this.snackbar.text = "Success Delete";
-                            this.snackbar.color = "success";
-                            this.$store.dispatch("getFiles");
-                            this.attach_dialog = false;
-                            this.attachment = null;
-                            this.listOfAttachments = [];
-            })
-                    
-                }
-            
-        }
+            let confirmed = confirm("Are you sure you to delete?");
+
+            if (confirmed) {
+                axios({
+                    method: "POST",
+                    url: "deleteFileDatabase",
+                    data: { id: val.id },
+                }).then(() => {
+                    this.snackbar.show = true;
+                    this.snackbar.text = "Success Delete";
+                    this.snackbar.color = "success";
+                    this.$store.dispatch("getFiles");
+                    this.attach_dialog = false;
+                    this.attachment = null;
+                    this.listOfAttachments = [];
+                });
+            }
+        },
     },
     computed: {
         ...mapState(["case_Files", "case_no"]),

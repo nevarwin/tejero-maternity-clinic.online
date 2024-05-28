@@ -1,12 +1,19 @@
 <template>
     <v-container class="container-main pt-0 pl-0" fluid>
         <v-dialog v-model="dialog" persistent max-width="500px">
-            <v-form  id="Insert" ref="Insert" @submit.prevent="toggleSave" enctype="multipart/form-data">
+            <v-form
+                id="Insert"
+                ref="Insert"
+                @submit.prevent="toggleSave"
+                enctype="multipart/form-data"
+            >
                 <v-card>
                     <v-card-title>
-                        <span>{{dialogSetting.title}}</span>
+                        <span>{{ dialogSetting.title }}</span>
                         <v-spacer></v-spacer>
-                        <v-icon color="white" @click="closeDialog()">mdi-close</v-icon>
+                        <v-icon color="white" @click="closeDialog()"
+                            >mdi-close</v-icon
+                        >
                     </v-card-title>
                     <v-card-text>
                         <v-container>
@@ -74,8 +81,20 @@
                                         label="Bed"
                                         v-model="data.bed_name"
                                         :items="selectBed"
-                                        :item-text="(elem) => { return elem.vacant =='yes'?'Occuppied':'Vacant'+' : '+elem.name}"
-                                        :item-value="(el)=>{return el.id}"
+                                        :item-text="
+                                            (elem) => {
+                                                return elem.vacant == 'yes'
+                                                    ? 'Occuppied'
+                                                    : 'Vacant' +
+                                                          ' : ' +
+                                                          elem.name;
+                                            }
+                                        "
+                                        :item-value="
+                                            (el) => {
+                                                return el.id;
+                                            }
+                                        "
                                         class="required"
                                         dense
                                         :rules="rules.required"
@@ -113,8 +132,20 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" text :disabled="dialogBtn" @click="closeDialog()">Close</v-btn>
-                        <v-btn color="blue darken-1" text :disabled="dialogBtn" @click="toggleSave()">{{dialogSetting.submitBtn}}</v-btn>
+                        <v-btn
+                            color="blue darken-1"
+                            text
+                            :disabled="dialogBtn"
+                            @click="closeDialog()"
+                            >Close</v-btn
+                        >
+                        <v-btn
+                            color="blue darken-1"
+                            text
+                            :disabled="dialogBtn"
+                            @click="toggleSave()"
+                            >{{ dialogSetting.submitBtn }}</v-btn
+                        >
                     </v-card-actions>
                 </v-card>
             </v-form>
@@ -123,87 +154,88 @@
 </template>
 
 <script>
-import moment from 'moment'
-import { mapActions, mapState } from 'vuex'
+import moment from "moment";
+import { mapActions, mapState } from "vuex";
 export default {
-    props:{
-        data:{
-            type: Object
+    props: {
+        data: {
+            type: Object,
         },
-        dialog:{
-            type:Boolean
+        dialog: {
+            type: Boolean,
         },
-        dialogSetting:{
-            type: Object
-        }
+        dialogSetting: {
+            type: Object,
+        },
     },
     data: () => ({
-        snackbarTimeout:3000,
-        dialogBtn:false,
-        caseNumber:moment().format("YYYY")+"-"+Math.floor(Math.random() * 1000).toString().padStart(3, '0')+'-'+Math.floor(Math.random() * 10000).toString().padStart(4, '0')
+        snackbarTimeout: 3000,
+        dialogBtn: false,
+        caseNumber:
+            moment().format("YYYY") +
+            "-" +
+            Math.floor(Math.random() * 1000)
+                .toString()
+                .padStart(3, "0") +
+            "-" +
+            Math.floor(Math.random() * 10000)
+                .toString()
+                .padStart(4, "0"),
         // console.log(this.data)
         // yearNow:moment().format("YYYY")+"-"
     }),
     methods: {
-        ...mapActions([
-            'getPatient',
-            'getDoctor',
-            'getRoom',
-        ]),
-        refresh(){
-            this.snackbar.show = false
-            location.reload()
+        ...mapActions(["getPatient", "getDoctor", "getRoom"]),
+        refresh() {
+            this.snackbar.show = false;
+            location.reload();
         },
-        closeDialog(){
-            this.$emit('closeDialog')
+        closeDialog() {
+            this.$emit("closeDialog");
         },
-        toggleSave(){
-            this.data.case_no = this.caseNumber
-            if(this.$refs.Insert.validate()){
-                this.$emit('toggleSave')
+        toggleSave() {
+            this.data.case_no = this.caseNumber;
+            if (this.$refs.Insert.validate()) {
+                this.$emit("toggleSave");
             }
         },
-    
     },
-    computed:{
+    computed: {
         ...mapState([
-            'rules',
-            'selectRoomType',
-            'patientData',
-            'doctorData',
-            'roomData',
+            "rules",
+            "selectRoomType",
+            "patientData",
+            "doctorData",
+            "roomData",
         ]),
-        selectBed(){
-            let arr=[]
-            this.roomData.filter(room=>{
-                if(this.data.room_id == room.id){
-                    arr = room.beds
+        selectBed() {
+            let arr = [];
+            this.roomData.filter((room) => {
+                if (this.data.room_id == room.id) {
+                    arr = room.beds;
                 }
-            })
-            let vacant = arr.filter((bed)=>{
-                if(bed.vacant !="yes"){
-                    return bed
+            });
+            let vacant = arr.filter((bed) => {
+                if (bed.vacant != "yes") {
+                    return bed;
                 }
-            })
-            console.log(vacant)
-            return vacant
-        }
+            });
+            console.log(vacant);
+            return vacant;
+        },
     },
-    watch:{
-        dialog(val){
-            if(!val){
-                this.$refs.Insert.resetValidation()
-            }else{
-                this.getPatient()
-                this.getDoctor()
-                this.getRoom()
+    watch: {
+        dialog(val) {
+            if (!val) {
+                this.$refs.Insert.resetValidation();
+            } else {
+                this.getPatient();
+                this.getDoctor();
+                this.getRoom();
             }
         },
-    }
-
-}
+    },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

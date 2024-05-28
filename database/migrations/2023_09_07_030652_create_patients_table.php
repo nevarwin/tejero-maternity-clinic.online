@@ -4,32 +4,31 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePatientsTable extends Migration
-{
+class CreatePatientsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->integer('age');
             $table->integer('sex_id');
-            $table->integer('civil_status_id');
-            $table->string('occupation');
-            $table->integer('religion_id');
-            $table->string('nationality');
-            $table->integer('address_id');
-            $table->string('contact_no');
+            $table->integer('weight');
+            $table->integer('civil_status_id')->nullable();
+            $table->string('occupation')->nullable();
+            $table->integer('religion_id')->nullable();
+            $table->string('nationality')->nullable();
+            $table->integer('address_id')->nullable();
+            $table->string('contact_no')->nullable();
             $table->date('birthday');
             $table->string('birth_place');
-            $table->string('type_of_patient');
-            $table->string('lmp');
-            $table->string('edc');
-            $table->string('aog');
+            $table->string('type_of_patient')->default(1);
+            $table->string('lmp')->nullable();
+            $table->string('edc')->nullable();
+            $table->string('aog')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -40,8 +39,7 @@ class CreatePatientsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('patients');
     }
 }
