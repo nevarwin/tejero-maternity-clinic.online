@@ -7,6 +7,8 @@
         <meta http-equiv="origin-trial"
             content="Az520Inasey3TAyqLyojQa8MnmCALSEU29yQFW8dePZ7xQTvSt73pHazLFTK5f7SyLUJSo2uKLesEtEa9aUYcgMAAACPeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IkRpc2FibGVUaGlyZFBhcnR5U3RvcmFnZVBhcnRpdGlvbmluZyIsImV4cGlyeSI6MTcyNTQwNzk5OSwiaXNTdWJkb21haW4iOnRydWUsImlzVGhpcmRQYXJ0eSI6dHJ1ZX0=">
         <link rel="stylesheet" href="./tejeroMnMClinic/557bb.default.include.9a900f.css" media="all">
+        <!-- Include Font Awesome CDN in the head of your HTML if not already included -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <div class="fit-vids-style" id="fit-vids-style" style="display: none;">­<style>
                 .fluid-width-video-wrapper {
                     width: 100%;
@@ -932,7 +934,6 @@
             .wpcf7-form input.wpcf7-submit:hover,
             .owl-buttons>div i:hover,
             article.post .entry-header,
-            .sm-up-container,
             .read-more,
             .testimonial-content,
             .round-icon,
@@ -945,6 +946,28 @@
             .top-header .read-more,
             .circle {
                 border: 2px solid #ff9400;
+            }
+
+            .sm-up-container {
+                background-color: #ff9400;
+                color: #fff;
+                display: none;
+                text-align: center;
+            }
+
+            .sm-up-container i {
+                vertical-align: middle;
+            }
+
+            .social-icons {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .social-icons a {
+                margin: 0 10px;
+                font-size: 24px;
             }
         </style>
 
@@ -1572,8 +1595,13 @@
                                 data-target=".navbar-collapse"><i class="fa fa-bars"></i></button>
                             <p class="site-title">
                                 <a id="dir_home_logo" href="#" title="Tejero Medical and Maternity Clinic"
-                                    rel="home">Tejero Medical
-                                    and Maternity Clinic</a>
+                                    rel="home">
+                                    <img src="./tejeroMnMClinic/photos/icon logo.png"
+                                        alt="Tejero Medical and Maternity Clinic Logo"
+                                        style="vertical-align: middle; height: 60px;">
+                                    <!-- Adjust the height as necessary -->
+                                    Tejero Medical and Maternity Clinic
+                                </a>
                             </p>
                         </div>
                         <div class="main-navigation navbar-collapse collapse">
@@ -1601,12 +1629,8 @@
                     </div>
                 </div>
             </div>
-            <div class="wrapper inner-main-title">
-                <div class="container">
-                    <header class="entry-header init-animate slideInUp1"
-                        style="visibility: visible; animation-name: slideInUp;">
-                        <h1 class="entry-title">Tejero Medical and Maternity Clinic</h1>
-                </div>
+            <div>
+                <img src="./tejeroMnMClinic/photos/welcome.png" alt="welcome" style="width: 100%;">
             </div>
             <div id="content" class="site-content container clearfix">
                 <div id="primary" class="content-area">
@@ -1641,38 +1665,13 @@
                                     <div class="pvc_clear"></div>
 
                                     <div class="pvc_clear"></div>
-                                    <p><span style="font-size: 14pt;"><strong>Services Offered</strong></span></p>
-                                    <table style="border-collapse: collapse; width: 100%;">
-                                        <tbody>
-                                            <tr>
-                                                <td style="width: 100%;">Pre-Natal Consult</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 100%;">Normal Vaginal Delivery</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 100%;">Post Partum Consult</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 100%;">Family Planning</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 100%;">Essential Newborn Care</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 100%;">Bleeding Disorders</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 100%;">PAPS Smear</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 100%;">Circumcision</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 100%;">Ear Piercing</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <p><span style="font-size: 14pt;"><strong>Package Offered</strong></span></p>
+                                    <h1>Package 1</h1>
+                                    <img src="./tejeroMnMClinic/photos/Package 1.png" alt="package 1">
+                                    <br>
+                                    <h1>Package 2</h1>
+                                    <img src="./tejeroMnMClinic/photos/Package 2.png" alt="package 2">
+
                                 </div><!-- .entry-content -->
                                 <footer class="entry-footer">
                                 </footer><!-- .entry-footer -->
@@ -1691,7 +1690,7 @@
                             <div class="init-animate slideInUp1"
                                 style="visibility: visible; animation-name: slideInUp;">
                                 <aside id="media_image-2" class="widget widget_media_image">
-                                    <img width="250" height="250" alt=""
+                                    <img width="150" height="150" alt=""
                                         style="max-width: 100%; height: auto;" decoding="async"
                                         data-srcset="./tejeroMnMClinic/photos/logo.png 210w, ./tejeroMnMClinic/photos/logo.png 100w"
                                         data-src="./tejeroMnMClinic/photos/logo.png"
@@ -1707,29 +1706,48 @@
                                             sizes="(max-width: 210px) 100vw, 210px" /></noscript></a>
                                 </aside>
                             </div>
+                            <div class="center">
+                                <div class="init-animate fadeInDown"
+                                    style="visibility: visible; animation-name: fadeInDown;">
+                                    <p class="has-text-align-center">
+                                        Tejero Medical and Maternity Clinic
+                                    </p>
+                                    <p class="has-text-align-center">
+                                        273 Gen. Trias Dr, General Trias, 4107 Cavite
+                                    </p>
+                                    <p class="has-text-align-center">
+                                        +63 921 261 8521
+                                    </p>
+                                </div>
+                                <div style="text-align: center;">
+                                    <a href="https://www.facebook.com/profile.php?id=100076198785713" target="_blank"
+                                        title="Facebook">
+                                        <i class="fab fa-facebook-square"
+                                            style="font-size: 35px; margin: 0 10px;"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/yourprofile" target="_blank"
+                                        title="Instagram">
+                                        <i class="fab fa-instagram-square"
+                                            style="font-size: 35px; margin: 0 10px;"></i>
+                                    </a>
+                                </div>
+                                <div class="init-animate fadeInDown"
+                                    style="visibility: visible; animation-name: fadeInDown; text-align: center; margin-top: 20px;">
+                                    <p class="has-text-align-center" style="margin: 0;">
+                                        &copy; 2024 Tejero Medical and Maternity Clinic. All Rights Reserved.
+                                    </p>
+                                    <p class="has-text-align-center" style="margin: 0;">
+                                        Developed by Angelito Colina and John Andrickson Pescasio
+                                    </p>
+                                </div>
+
+                            </div>
                         </div>
 
-                        <div class="center">
-                            <div class="init-animate fadeInDown"
-                                style="visibility: visible; animation-name: fadeInDown;">
-                                <p class="has-text-align-center">
-                                    2024 | Tejero Medical and Maternity Clinic | City of General Trias, Cavite,
-                                    Philippines
-                                </p>
-                                <p class="has-text-align-center">
-                                    ADDRESS: 273 Gen. Trias Dr, General Trias, 4107 Cavite
-                                </p>
-                                <p class="has-text-align-center">
-                                    CONTACT: +63 921 261 8521
-                                </p>
-                            </div>
-                            <div class="col-sm-4 init-animate fadeInDown"
-                                style="visibility: visible; animation-name: fadeInDown;">
-                            </div>
-                        </div>
                     </div>
-                    <a href="index.html" class="sm-up-container" style="display: none;"><i
-                            class="fa fa-angle-up sm-up"></i></a>
+                    <a href="#dir_home_logo" class="sm-up-container">
+                        <i class="fa fa-angle-up sm-up"></i>
+                    </a>
                 </div>
             </footer>
         </div><!-- #page -->
