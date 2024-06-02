@@ -6,7 +6,6 @@
                     <v-card>
                         <v-card-title>
                             Request For Medical Certificate
-                            <v-icon color="white">mdi-hospital-marker</v-icon>
                         </v-card-title>
                         <v-card-text>
                             <v-row>
