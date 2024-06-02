@@ -1507,6 +1507,16 @@
             .postid-11556 .post-thumb {
                 display: none;
             }
+
+            /* .flowchart {
+                text-align: center;
+            }
+
+            .flowchart div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            } */
         </style>
 
         <script src="./tejeroMnMClinic/wp-emoji-release.min.js.download" defer=""></script>
@@ -1571,8 +1581,13 @@
                                 data-target=".navbar-collapse"><i class="fa fa-bars"></i></button>
                             <p class="site-title">
                                 <a id="dir_home_logo" href="#" title="Tejero Medical and Maternity Clinic"
-                                    rel="home">Tejero Medical
-                                    and Maternity Clinic</a>
+                                    rel="home">
+                                    <img src="./tejeroMnMClinic/photos/icon logo.png"
+                                        alt="Tejero Medical and Maternity Clinic Logo"
+                                        style="vertical-align: middle; height: 60px;">
+                                    <!-- Adjust the height as necessary -->
+                                    Tejero Medical and Maternity Clinic
+                                </a>
                             </p>
                         </div>
                         <div class="main-navigation navbar-collapse collapse">
@@ -1614,12 +1629,8 @@
                     </div>
                 </div>
             </div>
-            <div class="wrapper inner-main-title">
-                <div class="container">
-                    <header class="entry-header init-animate slideInUp1"
-                        style="visibility: visible; animation-name: slideInUp;">
-                        <h1 class="entry-title">Tejero Medical and Maternity Clinic</h1>
-                </div>
+            <div>
+                <img src="./tejeroMnMClinic/photos/about.png" alt="about" style="width: 100%;">
             </div>
             <div id="content" class="site-content container clearfix">
                 <div id="primary" class="content-area">
@@ -1629,28 +1640,163 @@
                             style="visibility: visible; animation-name: slideInUp;">
 
                             <br>
+
+
                             <div class="single-feat clearfix" id="flowchart">
                                 <p><span style="font-size: 30pt;"><strong>FLOW CHART</strong></span></p>
                                 <figure class="single-thumb single-thumb-full">
-                                    <img fetchpriority="high" width="2560" height="1792"
-                                        alt="Tejero Medical and Maternity Clinic" decoding="async"
-                                        data-srcset="./tejeroMnMClinic/photos/photos/flowchart.jpg 2560w, ./tejeroMnMClinic/photos/photos/flowchart.jpg 600w"
-                                        data-src="./tejeroMnMClinic/photos/photos/flowchart.jpg"
-                                        data-sizes="(max-width: 2560px) 100vw, 2560px"
-                                        class="attachment-full size-full wp-post-image lazyloaded"
-                                        src="./tejeroMnMClinic/photos/photos/flowchart.jpg"
-                                        sizes="(max-width: 2560px) 100vw, 2560px"
-                                        srcset="./tejeroMnMClinic/photos/photos/flowchart.jpg 2560w, ./tejeroMnMClinic/photos/photos/flowchart.jpg 600w">
-                                    <noscript>
-                                        <img fetchpriority="high" width="2560" height="1792"
-                                            src="./tejeroMnMClinic/photos/photos/flowchart.jpg"
-                                            class="attachment-full size-full wp-post-image"
-                                            alt="Tejero Medical and Maternity Clinic" decoding="async"
-                                            srcset="./tejeroMnMClinic/photos/photos/flowchart.jpg 2560w, ./tejeroMnMClinic/photos/photos/flowchart.jpg 600w"
-                                            sizes="(max-width: 2560px) 100vw, 2560px" />
-                                    </noscript>
+                                    <!-- Existing image content -->
                                 </figure>
+                                <!-- Text to toggle flowchart visibility -->
+                                <!-- Consultation flowchart representation -->
+                                <p id="toggleConsultationFlowchart" style="cursor: pointer;"><strong>Consultation
+                                        ▼</strong></p>
+                                <div class="flowchart" id="consultationFlowchart" style="display: none;">
+                                    <div>
+                                        <span>Greet</span>
+                                    </div>
+                                    <div>
+                                        <span>▼</span>
+                                    </div>
+                                    <div>
+                                        <span>Ask</span>
+                                    </div>
+                                    <div>
+                                        <span>▼</span>
+                                    </div>
+                                    <div>
+                                        <span>Interview (Chief Complaints)</span>
+                                    </div>
+                                    <div>
+                                        <span>▼</span>
+                                    </div>
+                                    <div>
+                                        <span>Assess (Vital Signs)</span>
+                                    </div>
+                                    <div>
+                                        <span>▼</span>
+                                    </div>
+                                    <div>
+                                        <span>Consult</span>
+                                    </div>
+                                    <div>
+                                        <span>▼</span>
+                                    </div>
+                                    <div>
+                                        <span>Explain</span>
+                                    </div>
+                                    <div>
+                                        <span>▼</span>
+                                    </div>
+                                    <p>Record</p>
+                                </div>
+
+                                <p id="toggleDeliveryFlowchart" style="cursor: pointer;"><strong>Normal Spontaneous
+                                        Delivery ▼</strong></p>
+                                <div class="flowchart" id="deliveryFlowchart">
+                                    <div class="step">
+                                        <span>Greet</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>▼</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>Ask</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>▼</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>Assess</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>▼</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>Admit</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>▼</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>Monitor</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>▼</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>Refer</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>▼</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>Ask</span>
+                                    </div>
+                                </div>
+
+                                <p id="toggleFamilyPlanningFlowchart" style="cursor: pointer;"><strong>Family Planning
+                                        ▼</strong></p>
+                                <div class="flowchart" id="familyPlanningFlowchart">
+                                    <div class="step">
+                                        <span>Greet</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>▼</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>Assess</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>▼</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>Tell</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>▼</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>Help</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>▼</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>Explain</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>▼</span>
+                                    </div>
+                                    <div class="step">
+                                        <span>Refer or Return Visit</span>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    function toggleFlowchart(buttonId, flowchartId, openText, closeText) {
+                                        document.getElementById(buttonId).addEventListener('click', function() {
+                                            var flowchart = document.getElementById(flowchartId);
+                                            if (flowchart.style.display === 'none') {
+                                                flowchart.style.display = 'block';
+                                                document.getElementById(buttonId).innerHTML = '<strong>' + openText + '</strong>';
+                                            } else {
+                                                flowchart.style.display = 'none';
+                                                document.getElementById(buttonId).innerHTML = '<strong>' + closeText + '</strong>';
+                                            }
+                                        });
+                                    }
+
+                                    toggleFlowchart('toggleConsultationFlowchart', 'consultationFlowchart', 'Consultation ▲', 'Consultation ▼');
+                                    toggleFlowchart('toggleDeliveryFlowchart', 'deliveryFlowchart', 'Normal Spontaneous Delivery ▲',
+                                        'Normal Spontaneous Delivery ▼');
+                                    toggleFlowchart('toggleFamilyPlanningFlowchart', 'familyPlanningFlowchart', 'Family Planning ▲',
+                                        'Family Planning ▼');
+                                </script>
                             </div>
+
+
+
                             <br>
                             <div class="single-feat clearfix" id="mission">
                                 <p><span style="font-size: 30pt;"><strong>MISSION</strong></span></p>
@@ -1710,7 +1856,7 @@
                             <div class="init-animate slideInUp1"
                                 style="visibility: visible; animation-name: slideInUp;">
                                 <aside id="media_image-2" class="widget widget_media_image">
-                                    <img width="250" height="250" alt=""
+                                    <img width="150" height="150" alt=""
                                         style="max-width: 100%; height: auto;" decoding="async"
                                         data-srcset="./tejeroMnMClinic/photos/logo.png 210w, ./tejeroMnMClinic/photos/logo.png 100w"
                                         data-src="./tejeroMnMClinic/photos/logo.png"
@@ -1726,29 +1872,48 @@
                                             sizes="(max-width: 210px) 100vw, 210px" /></noscript></a>
                                 </aside>
                             </div>
+                            <div class="center">
+                                <div class="init-animate fadeInDown"
+                                    style="visibility: visible; animation-name: fadeInDown;">
+                                    <p class="has-text-align-center">
+                                        Tejero Medical and Maternity Clinic
+                                    </p>
+                                    <p class="has-text-align-center">
+                                        273 Gen. Trias Dr, General Trias, 4107 Cavite
+                                    </p>
+                                    <p class="has-text-align-center">
+                                        +63 921 261 8521
+                                    </p>
+                                </div>
+                                <div style="text-align: center;">
+                                    <a href="https://www.facebook.com/profile.php?id=100076198785713" target="_blank"
+                                        title="Facebook">
+                                        <i class="fab fa-facebook-square"
+                                            style="font-size: 35px; margin: 0 10px;"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/yourprofile" target="_blank"
+                                        title="Instagram">
+                                        <i class="fab fa-instagram-square"
+                                            style="font-size: 35px; margin: 0 10px;"></i>
+                                    </a>
+                                </div>
+                                <div class="init-animate fadeInDown"
+                                    style="visibility: visible; animation-name: fadeInDown; text-align: center; margin-top: 20px;">
+                                    <p class="has-text-align-center" style="margin: 0;">
+                                        &copy; 2024 Tejero Medical and Maternity Clinic. All Rights Reserved.
+                                    </p>
+                                    <p class="has-text-align-center" style="margin: 0;">
+                                        Developed by Angelito Colina and John Andrickson Pescasio
+                                    </p>
+                                </div>
+
+                            </div>
                         </div>
 
-                        <div class="center">
-                            <div class="init-animate fadeInDown"
-                                style="visibility: visible; animation-name: fadeInDown;">
-                                <p class="has-text-align-center">
-                                    2024 | Tejero Medical and Maternity Clinic | City of General Trias, Cavite,
-                                    Philippines
-                                </p>
-                                <p class="has-text-align-center">
-                                    ADDRESS: 273 Gen. Trias Dr, General Trias, 4107 Cavite
-                                </p>
-                                <p class="has-text-align-center">
-                                    CONTACT: +63 921 261 8521
-                                </p>
-                            </div>
-                            <div class="col-sm-4 init-animate fadeInDown"
-                                style="visibility: visible; animation-name: fadeInDown;">
-                            </div>
-                        </div>
                     </div>
-                    <a href="" class="sm-up-container" style="display: none;"><i
-                            class="fa fa-angle-up sm-up"></i></a>
+                    <a href="#dir_home_logo" class="sm-up-container">
+                        <i class="fa fa-angle-up sm-up"></i>
+                    </a>
                 </div>
             </footer>
         </div><!-- #page -->
