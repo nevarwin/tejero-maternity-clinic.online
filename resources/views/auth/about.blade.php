@@ -1320,6 +1320,17 @@
                 transition: opacity 400ms;
                 transition-delay: 0ms;
             }
+
+            .sm-up-container {
+                background-color: #ff9400;
+                color: #fff;
+                display: none;
+                text-align: center;
+            }
+
+            .sm-up-container i {
+                vertical-align: middle;
+            }
         </style>
         <meta name="generator"
             content="Elementor 3.18.0; features: e_dom_optimization, e_optimized_assets_loading, additional_custom_breakpoints, block_editor_assets_optimize, e_image_loading_optimization; settings: css_print_method-external, google_font-enabled, font_display-auto">
@@ -1798,47 +1809,21 @@
 
 
                             <br>
-                            <div class="single-feat clearfix" id="mission">
+                            <div class="single-feat clearfix" id="mission"
+                                style="display: inline-block; vertical-align: top; width: 49%;">
                                 <p><span style="font-size: 30pt;"><strong>MISSION</strong></span></p>
                                 <figure class="single-thumb single-thumb-full">
-                                    <img fetchpriority="high" width="2560" height="1792"
-                                        alt="Tejero Medical and Maternity Clinic" decoding="async"
-                                        data-srcset="./tejeroMnMClinic/photos/2.png 2560w, ./tejeroMnMClinic/photos/2.png 600w"
-                                        data-src="./tejeroMnMClinic/photos/2.png"
-                                        data-sizes="(max-width: 2560px) 100vw, 2560px"
-                                        class="attachment-full size-full wp-post-image lazyloaded"
-                                        src="./tejeroMnMClinic/photos/2.png" sizes="(max-width: 2560px) 100vw, 2560px"
-                                        srcset="./tejeroMnMClinic/photos/2.png 2560w, ./tejeroMnMClinic/photos/2.png 600w">
-                                    <noscript>
-                                        <img fetchpriority="high" width="2560" height="1792"
-                                            src="./tejeroMnMClinic/photos/2.png"
-                                            class="attachment-full size-full wp-post-image"
-                                            alt="Tejero Medical and Maternity Clinic" decoding="async"
-                                            srcset="./tejeroMnMClinic/photos/2.png 2560w, ./tejeroMnMClinic/photos/2.png 600w"
-                                            sizes="(max-width: 2560px) 100vw, 2560px" />
-                                    </noscript>
+                                    <img src="./tejeroMnMClinic/photos/2.png" alt="vision img"
+                                        style="width: 100%; height: auto;">
                                 </figure>
                             </div>
-                            <br>
-                            <div class="single-feat clearfix" id="vision">
+
+                            <div class="single-feat clearfix" id="vision"
+                                style="display: inline-block; vertical-align: top; width: 49%;">
                                 <p><span style="font-size: 30pt;"><strong>VISION</strong></span></p>
                                 <figure class="single-thumb single-thumb-full">
-                                    <img fetchpriority="high" width="2560" height="1792"
-                                        alt="Tejero Medical and Maternity Clinic" decoding="async"
-                                        data-srcset="./tejeroMnMClinic/photos/1.png 2560w, ./tejeroMnMClinic/photos/1.png 600w"
-                                        data-src="./tejeroMnMClinic/photos/1.png"
-                                        data-sizes="(max-width: 2560px) 100vw, 2560px"
-                                        class="attachment-full size-full wp-post-image lazyloaded"
-                                        src="./tejeroMnMClinic/photos/1.png" sizes="(max-width: 2560px) 100vw, 2560px"
-                                        srcset="./tejeroMnMClinic/photos/1.png 2560w, ./tejeroMnMClinic/photos/1.png 600w">
-                                    <noscript>
-                                        <img fetchpriority="high" width="2560" height="1792"
-                                            src="./tejeroMnMClinic/photos/1.png"
-                                            class="attachment-full size-full wp-post-image"
-                                            alt="Tejero Medical and Maternity Clinic" decoding="async"
-                                            srcset="./tejeroMnMClinic/photos/1.png 2560w, ./tejeroMnMClinic/photos/1.png 600w"
-                                            sizes="(max-width: 2560px) 100vw, 2560px" />
-                                    </noscript>
+                                    <img src="./tejeroMnMClinic/photos/2.png" alt="vision img"
+                                        style="width: 100%; height: auto;">
                                 </figure>
                             </div>
 
