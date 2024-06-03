@@ -1822,7 +1822,7 @@
                                 style="display: inline-block; vertical-align: top; width: 49%;">
                                 <p><span style="font-size: 30pt;"><strong>VISION</strong></span></p>
                                 <figure class="single-thumb single-thumb-full">
-                                    <img src="./tejeroMnMClinic/photos/2.png" alt="vision img"
+                                    <img src="./tejeroMnMClinic/photos/1.png" alt="vision img"
                                         style="width: 100%; height: auto;">
                                 </figure>
                             </div>
