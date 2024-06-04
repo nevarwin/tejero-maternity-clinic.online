@@ -1713,7 +1713,7 @@
                                         Tejero Medical and Maternity Clinic
                                     </p>
                                     <p class="has-text-align-center">
-                                        273 Gen. Trias Dr, General Trias, 4107 Cavite
+                                        273 Gen. Trias Dr, General Trias City, 4107 Cavite
                                     </p>
                                     <p class="has-text-align-center">
                                         +63 921 261 8521
