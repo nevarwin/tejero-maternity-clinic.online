@@ -242,7 +242,7 @@
             }
 
             .wp-block-code {
-                border: 1px solid #ccc;
+                /* border: 1px solid #ccc; */
                 border-radius: 4px;
                 font-family: Menlo, Consolas, monaco, monospace;
                 padding: .8em 1em
@@ -1534,6 +1534,42 @@
 
         <script type="text/javascript" charset="UTF-8" src="./tejeroMnMClinic/common.js.download"></script>
         <script type="text/javascript" charset="UTF-8" src="./tejeroMnMClinic/util.js.download"></script>
+
+        <style>
+            .single-feat {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .flowchart-container {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .flowchart-wrapper {
+                width: 30%;
+            }
+
+            .flowchart {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .step,
+            .single-thumb {
+                text-align: center;
+                margin: 10px 0;
+            }
+
+            #flowchart p {
+                cursor: pointer;
+                text-align: center;
+                font-size: 1.2em;
+            }
+        </style>
     </head>
 
     <body
@@ -1609,22 +1645,8 @@
                                         <a id="dir_home" href="#">HOME</a>
                                     </li>
                                     <li id="menu-item-886"
-                                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-886">
+                                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-886">
                                         <a id="dir_about" href="#">ABOUT</a>
-                                        <ul class="sub-menu">
-                                            <li id="menu-item-889"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-889">
-                                                <a id="dir_about" href="#flowchat">FLOWCHART</a>
-                                            </li>
-                                            <li id="menu-item-893"
-                                                class="menu-item menu-item-type-custom menu-item-object-customn menu-item-893">
-                                                <a id="dir_about" href="#mission">MISSION</a>
-                                            </li>
-                                            <li id="menu-item-897"
-                                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-897">
-                                                <a id="dir_about" href="#vision">VISION</a>
-                                            </li>
-                                        </ul>
                                     </li>
                                     <li id="menu-item-880"
                                         class="menu-item menu-item-type-custom menu-item-object-custom menu-item-880">
@@ -1652,6 +1674,27 @@
 
                             <br>
 
+                            <div class="single-feat clearfix" id="mission"
+                                style="display: inline-block; vertical-align: top; width: 49%;">
+                                <p><span style="font-size: 30pt;"><strong>MISSION</strong></span></p>
+                                {{-- <h1>Nurturing life...Saving lives...</h1> --}}
+                                <figure class="single-thumb single-thumb-full">
+                                    <img src="./tejeroMnMClinic/photos/mission.png" alt="vision img"
+                                        style="width: 100%; height: auto;">
+                                </figure>
+                            </div>
+
+                            <div class="single-feat clearfix" id="vision"
+                                style="display: inline-block; vertical-align: top; width: 49%;">
+                                <p><span style="font-size: 30pt;"><strong>VISION</strong></span></p>
+                                {{-- <h1>A premier birthing home in the city of Gen. Trias, Cavite</h1> --}}
+                                <figure class="single-thumb single-thumb-full">
+                                    <img src="./tejeroMnMClinic/photos/vision.png" alt="vision img"
+                                        style="width: 100%; height: auto;">
+                                </figure>
+                            </div>
+                            <br>
+                            <br>
 
                             <div class="single-feat clearfix" id="flowchart">
                                 <p><span style="font-size: 30pt;"><strong>FLOW CHART</strong></span></p>
@@ -1660,127 +1703,137 @@
                                 </figure>
                                 <!-- Text to toggle flowchart visibility -->
                                 <!-- Consultation flowchart representation -->
-                                <p id="toggleConsultationFlowchart" style="cursor: pointer;"><strong>Consultation
-                                        ▼</strong></p>
-                                <div class="flowchart" id="consultationFlowchart" style="display: none;">
-                                    <div>
-                                        <span>Greet</span>
+                                <div class="flowchart-container">
+                                    <div class="flowchart-wrapper">
+                                        <p id="toggleConsultationFlowchart" style="cursor: pointer;">
+                                            <strong>Consultation
+                                                ▼</strong>
+                                        </p>
+                                        <div class="flowchart" id="consultationFlowchart" style="display: none;">
+                                            <div class="step">
+                                                <span>Greet</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>Ask</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>Interview (Chief Complaints)</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>Assess (Vital Signs)</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>Consult</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>Explain</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <p>Record</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <span>▼</span>
+                                    <div class="flowchart-wrapper">
+                                        <p id="toggleDeliveryFlowchart" style="cursor: pointer;"><strong>Normal
+                                                Spontaneous
+                                                Delivery ▼</strong></p>
+                                        <div class="flowchart" id="deliveryFlowchart" style="display: none;">
+                                            <div class="step">
+                                                <span>Greet</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>Ask</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>Assess</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>Admit</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>Monitor</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>Refer</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>Ask</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <span>Ask</span>
-                                    </div>
-                                    <div>
-                                        <span>▼</span>
-                                    </div>
-                                    <div>
-                                        <span>Interview (Chief Complaints)</span>
-                                    </div>
-                                    <div>
-                                        <span>▼</span>
-                                    </div>
-                                    <div>
-                                        <span>Assess (Vital Signs)</span>
-                                    </div>
-                                    <div>
-                                        <span>▼</span>
-                                    </div>
-                                    <div>
-                                        <span>Consult</span>
-                                    </div>
-                                    <div>
-                                        <span>▼</span>
-                                    </div>
-                                    <div>
-                                        <span>Explain</span>
-                                    </div>
-                                    <div>
-                                        <span>▼</span>
-                                    </div>
-                                    <p>Record</p>
-                                </div>
-
-                                <p id="toggleDeliveryFlowchart" style="cursor: pointer;"><strong>Normal Spontaneous
-                                        Delivery ▼</strong></p>
-                                <div class="flowchart" id="deliveryFlowchart">
-                                    <div class="step">
-                                        <span>Greet</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>▼</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>Ask</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>▼</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>Assess</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>▼</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>Admit</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>▼</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>Monitor</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>▼</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>Refer</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>▼</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>Ask</span>
-                                    </div>
-                                </div>
-
-                                <p id="toggleFamilyPlanningFlowchart" style="cursor: pointer;"><strong>Family Planning
-                                        ▼</strong></p>
-                                <div class="flowchart" id="familyPlanningFlowchart">
-                                    <div class="step">
-                                        <span>Greet</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>▼</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>Assess</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>▼</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>Tell</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>▼</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>Help</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>▼</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>Explain</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>▼</span>
-                                    </div>
-                                    <div class="step">
-                                        <span>Refer or Return Visit</span>
+                                    <div class="flowchart-wrapper">
+                                        <p id="toggleFamilyPlanningFlowchart" style="cursor: pointer;"><strong>Family
+                                                Planning
+                                                ▼</strong></p>
+                                        <div class="flowchart" id="familyPlanningFlowchart" style="display: none;">
+                                            <div class="step">
+                                                <span>Greet</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>Assess</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>Tell</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>Help</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>Explain</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>▼</span>
+                                            </div>
+                                            <div class="step">
+                                                <span>Refer or Return Visit</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1805,28 +1858,6 @@
                                         'Family Planning ▼');
                                 </script>
                             </div>
-
-
-
-                            <br>
-                            <div class="single-feat clearfix" id="mission"
-                                style="display: inline-block; vertical-align: top; width: 49%;">
-                                <p><span style="font-size: 30pt;"><strong>MISSION</strong></span></p>
-                                <figure class="single-thumb single-thumb-full">
-                                    <img src="./tejeroMnMClinic/photos/2.png" alt="vision img"
-                                        style="width: 100%; height: auto;">
-                                </figure>
-                            </div>
-
-                            <div class="single-feat clearfix" id="vision"
-                                style="display: inline-block; vertical-align: top; width: 49%;">
-                                <p><span style="font-size: 30pt;"><strong>VISION</strong></span></p>
-                                <figure class="single-thumb single-thumb-full">
-                                    <img src="./tejeroMnMClinic/photos/1.png" alt="vision img"
-                                        style="width: 100%; height: auto;">
-                                </figure>
-                            </div>
-
                         </article><!-- #post-## -->
                     </main><!-- #main -->
                 </div><!-- #primary -->
@@ -1864,7 +1895,7 @@
                                         Tejero Medical and Maternity Clinic
                                     </p>
                                     <p class="has-text-align-center">
-                                        273 Gen. Trias Dr, General Trias, 4107 Cavite
+                                        273 Gen. Trias Dr, General Trias City, 4107 Cavite
                                     </p>
                                     <p class="has-text-align-center">
                                         +63 921 261 8521
