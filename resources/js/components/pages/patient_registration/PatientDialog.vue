@@ -203,6 +203,10 @@
                                                 persistent-placeholder
                                                 outlined
                                                 name="sex"
+                                                :disabled="
+                                                    patient.type_of_patient ===
+                                                    2
+                                                "
                                             ></v-select>
                                         </v-col>
                                         <template
@@ -463,6 +467,11 @@ export default {
         maxDate: moment().format("YYYY-MM-DD"),
     }),
     methods: {
+        // setSexId() {
+        //     if (this.patient.type_of_patient == 2) {
+        //         this.patient.sex_id = 1;
+        //     }
+        // },
         refresh() {
             this.snackbar.show = false;
             location.reload();
@@ -600,6 +609,14 @@ export default {
             if (!val) {
                 this.$refs.Insert.resetValidation();
             }
+        },
+        "patient.type_of_patient": {
+            handler(newVal) {
+                if (newVal === 2) {
+                    this.patient.sex_id = 1;
+                }
+            },
+            immediate: true,
         },
     },
 };
