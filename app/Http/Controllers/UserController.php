@@ -249,8 +249,9 @@ class UserController extends Controller {
         }
     }
     public function downloadFiles($file) {
+        //./storage/public/storage/clinic_files
         try {
-            $filePath = storage_path('app/public/' . $file);
+            $filePath = storage_path('storage/public/storage/clinic_files/' . $file);
 
             if (file_exists($filePath)) {
                 return response()->download($filePath);
