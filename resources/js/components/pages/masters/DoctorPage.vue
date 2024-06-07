@@ -128,7 +128,7 @@
                                         v-model="position"
                                         class="required uppercase"
                                         dense
-                                        :items="['Midwife', 'Doctor']"
+                                        :items="['MIDWIFE', 'DOCTOR']"
                                         item-text="name"
                                         item-value="id"
                                         :rules="rules.required"
