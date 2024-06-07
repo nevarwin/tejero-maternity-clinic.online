@@ -1907,6 +1907,7 @@
                         </div>
 
                         <div class="right-content">
+                            <!-- Right content goes here -->
                             <div class="init-animate fadeInDown" style="text-align: center; margin-top: 20px;">
                                 <p class="has-text-align-center" style="margin: 0;">
                                     Developed by Colina, Angelito and Pescasio, John Andrickson
