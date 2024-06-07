@@ -1,8 +1,12 @@
 <template>
     <v-container class="container-main pt-0 pl-0" fluid>
-        <v-dialog v-model="dialog" persistent max-width="500px">
+        <v-dialog
+            v-model="dialog"
+            persistent
+            max-width="500px"
+            @close="resetForm"
+        >
             <v-form
-                id="Insert"
                 ref="Insert"
                 @submit.prevent="toggleSave"
                 enctype="multipart/form-data"
@@ -29,6 +33,7 @@
                                         outlined
                                         :readonly="data.id"
                                         name="case_no"
+                                        readonly
                                     ></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
@@ -71,7 +76,6 @@
                                         class="required"
                                         dense
                                         :rules="rules.required"
-                                        persistent-placeholder
                                         outlined
                                         name="room_id"
                                     ></v-autocomplete>
@@ -79,7 +83,7 @@
                                 <v-col cols="6">
                                     <v-autocomplete
                                         label="Bed"
-                                        v-model="data.bed_name"
+                                        v-model="data.bed_id"
                                         :items="selectBed"
                                         :item-text="
                                             (elem) => {
@@ -98,7 +102,6 @@
                                         class="required"
                                         dense
                                         :rules="rules.required"
-                                        persistent-placeholder
                                         outlined
                                         name="bed_name"
                                     ></v-autocomplete>
@@ -132,11 +135,7 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn
-                            color="blue darken-1"
-                            text
-                            :disabled="dialogBtn"
-                            @click="closeDialog()"
+                        <v-btn color="blue darken-1" text @click="closeDialog()"
                             >Close</v-btn
                         >
                         <v-btn
@@ -156,34 +155,20 @@
 <script>
 import moment from "moment";
 import { mapActions, mapState } from "vuex";
+
 export default {
     props: {
-        data: {
-            type: Object,
-        },
-        dialog: {
-            type: Boolean,
-        },
-        dialogSetting: {
-            type: Object,
-        },
+        data: Object,
+        dialog: Boolean,
+        dialogSetting: Object,
     },
-    data: () => ({
-        snackbarTimeout: 3000,
-        dialogBtn: false,
-        caseNumber:
-            moment().format("YYYY") +
-            "-" +
-            Math.floor(Math.random() * 1000)
-                .toString()
-                .padStart(3, "0") +
-            "-" +
-            Math.floor(Math.random() * 10000)
-                .toString()
-                .padStart(4, "0"),
-        // console.log(this.data)
-        // yearNow:moment().format("YYYY")+"-"
-    }),
+    data() {
+        return {
+            snackbarTimeout: 3000,
+            dialogBtn: false,
+            caseNumber: "",
+        };
+    },
     methods: {
         ...mapActions(["getPatient", "getDoctor", "getRoom"]),
         refresh() {
@@ -199,6 +184,22 @@ export default {
                 this.$emit("toggleSave");
             }
         },
+        resetForm() {
+            this.$refs.Insert.resetValidation();
+        },
+        generateCaseNumber() {
+            return (
+                moment().format("YYYY") +
+                "-" +
+                Math.floor(Math.random() * 1000)
+                    .toString()
+                    .padStart(3, "0") +
+                "-" +
+                Math.floor(Math.random() * 10000)
+                    .toString()
+                    .padStart(4, "0")
+            );
+        },
     },
     computed: {
         ...mapState([
@@ -209,26 +210,18 @@ export default {
             "roomData",
         ]),
         selectBed() {
-            let arr = [];
-            this.roomData.filter((room) => {
-                if (this.data.room_id == room.id) {
-                    arr = room.beds;
-                }
-            });
-            let vacant = arr.filter((bed) => {
-                if (bed.vacant != "yes") {
-                    return bed;
-                }
-            });
-            console.log(vacant);
-            return vacant;
+            if (!this.data.room_id) return [];
+            const room = this.roomData.find(
+                (room) => room.id === this.data.room_id
+            );
+            if (!room) return [];
+            return room.beds.filter((bed) => bed.vacant !== "yes");
         },
     },
     watch: {
         dialog(val) {
-            if (!val) {
-                this.$refs.Insert.resetValidation();
-            } else {
+            if (val) {
+                this.caseNumber = this.generateCaseNumber();
                 this.getPatient();
                 this.getDoctor();
                 this.getRoom();
