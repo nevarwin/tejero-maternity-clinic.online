@@ -137,8 +137,21 @@ export default {
                         horizontal: false,
                     },
                 },
+                dataLabels: {
+                    enabled: false, // Disables the data labels
+                },
                 xaxis: {
                     categories: [],
+                },
+                yaxis: {
+                    labels: {
+                        formatter: function (val) {
+                            return parseInt(val);
+                        },
+                    },
+                    max: function (max) {
+                        return Math.ceil(max);
+                    },
                 },
                 tooltip: {
                     enabled: true,
