@@ -38,7 +38,7 @@
                                                 outlined
                                                 dense
                                                 label="Date of Birth"
-                                                readonly
+                                                disabled
                                             ></v-text-field>
                                         </template>
                                         <v-date-picker
@@ -46,6 +46,7 @@
                                                 newBornRecord.date_of_birth
                                             "
                                             @input="menu = false"
+                                            disabled
                                         ></v-date-picker>
                                     </v-menu>
                                 </v-col>

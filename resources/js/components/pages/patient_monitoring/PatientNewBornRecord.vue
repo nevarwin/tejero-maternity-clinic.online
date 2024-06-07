@@ -155,7 +155,7 @@ export default {
             return {
                 patient_id: this.case_data.patient_id,
                 case_no: this.case_data.case_no,
-                date_of_birth: "",
+                date_of_birth: new Date().toISOString().substr(0, 10),
                 time_of_birth: "",
                 birth_weight: "",
                 birth_lenght: "",
