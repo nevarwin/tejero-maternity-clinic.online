@@ -55,7 +55,11 @@
                                         outlined
                                         label="Status"
                                         v-model="tempstatus"
-                                        :items="['Claimed', 'Pending', 'Spam']"
+                                        :items="[
+                                            'Pending',
+                                            'Processed',
+                                            'Claimed',
+                                        ]"
                                         name="status"
                                         dense
                                     ></v-select>
