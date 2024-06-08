@@ -227,6 +227,19 @@
                                 </v-col>
                                 <v-col cols="12">
                                     <v-text-field
+                                        label="Old Password"
+                                        v-model="oldPassword"
+                                        class="required"
+                                        dense
+                                        type="password"
+                                        :rules="rules.password"
+                                        persistent-placeholder
+                                        outlined
+                                        name="oldPassword"
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-text-field
                                         label="New Password"
                                         v-model="tempPassword"
                                         class="required"
@@ -235,7 +248,7 @@
                                         :rules="rules.password"
                                         persistent-placeholder
                                         outlined
-                                        name="password"
+                                        name="newPassword"
                                     ></v-text-field>
                                 </v-col>
                                 <v-col>
@@ -329,20 +342,28 @@
             :editMode="editMode"
             :selectedRowsCnt="selectedRows.length"
         ></float-action>
+        <snackbar :snackbar="snackbar"></snackbar>
     </v-container>
 </template>
 <script>
 import ToolbarComponent from "../../includes/Toolbar";
-// import FloatAction from '../../includes/FloatAction.vue'
+// import FloatAction from "../../includes/FloatAction.vue";
+import SnackBar from "../../includes/SnackBar.vue";
 import { mapActions, mapState } from "vuex";
 export default {
     name: "Employee",
     components: {
         toolbar: ToolbarComponent,
-        // 'float-action':FloatAction,
+        // "float-action": FloatAction,
+        snackbar: SnackBar,
     },
     data() {
         return {
+            snackbar: {
+                show: false,
+                color: "success",
+                text: null,
+            },
             employee: [],
             empIds: null,
             toolbar: {
@@ -389,6 +410,7 @@ export default {
             tempToDeleteId: null,
             tempName: null,
             tempUsername: null,
+            oldPassword: null,
             tempPassword: null,
             tempIp: null,
             tempEmail: null,
@@ -436,9 +458,10 @@ export default {
             this.tempUsername = item.username;
             this.tempIp = item.ip;
             this.tempPassword = "";
+            this.oldPassword = "";
             this.tempId = item.id;
             this.access_position = item.access;
-            this.status_staff = item.status == "1" ? "Active" : "Inactive";
+            this.status_staff = item.status == "Active" ? "Active" : "Inactive";
             this.editDialog = true;
         },
         Update() {
@@ -455,12 +478,24 @@ export default {
                     .then((res) => {
                         console.log(res.data);
                         this.loadMore = false;
-                        // this.$refs.Insert.resetValidation()
-                        this.editDialog = false;
-                        this.getRegister();
+                        if (res.data === "Old password is incorrect") {
+                            // Display an error toast if old password is incorrect
+                            this.snackbar.show = true;
+                            this.snackbar.text = "Update Failed";
+                            this.snackbar.color = "error";
+                        } else {
+                            // If no error, close the dialog and refresh data
+                            this.snackbar.show = true;
+                            this.snackbar.text = "Success Update";
+                            this.snackbar.color = "success";
+                            this.editDialog = false;
+                            this.getRegister();
+                        }
                     })
                     .catch((err) => {
+                        // Log any other errors
                         console.log(err);
+                        this.loadMore = false;
                     });
             }
         },

@@ -161,17 +161,25 @@ class UserController extends Controller {
         }
     }
     public function register_update(Request $req) {
-        // return $req;
         try {
             $user = User::find($req->id);
-            $user->name = strtoupper($req->name);
-            $user->username = strtoupper($req->username);
-            $user->password = Hash::make($req->password);
-            $user->status = $req->status;
-            $user->access = $req->access;
-            $user->save();
-            return 'success';
+
+            // Check if the old password matches the user's current password
+            if (Hash::check($req->oldPassword, $user->password)) {
+                // If old password matches, update the user's details
+                $user->name = strtoupper($req->name);
+                $user->username = strtoupper($req->username);
+                $user->password = Hash::make($req->newPassword); // Hashing the new password
+                $user->status = $req->status;
+                $user->access = $req->access;
+                $user->save();
+                return 'success';
+            } else {
+                // If old password doesn't match, return an error message
+                return 'Old password is incorrect';
+            }
         } catch (\Exception $e) {
+            // Handle any exceptions
             return $e->getMessage();
         }
     }
