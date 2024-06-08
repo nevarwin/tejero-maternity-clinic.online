@@ -16,10 +16,10 @@
                     <th>Amniotic fluid (meconium stained)</th>
                     <th>Contraction in 10 minutes</th>
                     <th>Fetal heart rate(beats/minute)</th>
-                    <th>Urine volded</th>
+                    <th>Urine voided</th>
                     <th>T(axiliary)</th>
                     <th>Pulse(beats/minutes)</th>
-                    <th>Blood Presure(systolic/dialostic)</th>
+                    <th>Blood Pressure(systolic/diastolic)</th>
                     <th>Cervical Dilation(cm)</th>
                     <th>Delivery of Placenta(beats/minutes)</th>
                     <th>Oxytocin</th>
@@ -38,7 +38,7 @@
                     <td>{{ item.amniotic_fluid }}</td>
                     <td>{{ item.contraction }}</td>
                     <td>{{ item.fetal_heart_rate }}</td>
-                    <td>{{ item.urine_volded }}</td>
+                    <td>{{ item.urine_voided }}</td>
                     <td>{{ item.axiliary }}</td>
                     <td>{{ item.pulse }}</td>
                     <td>{{ item.blood_presure }}</td>
@@ -99,6 +99,11 @@
                             v-model.number="maxDuration"
                             label="Max duration (hours)"
                             type="number"
+                            :rules="[
+                                (v) =>
+                                    (v > 0 && v <= 12) ||
+                                    'Duration must be between 1 and 12 hours',
+                            ]"
                         ></v-text-field>
                     </v-row>
                     <v-row>
@@ -108,132 +113,145 @@
                             v-model.number="dilation"
                             label="Dilation (cm)"
                             type="number"
+                            :rules="[
+                                (v) =>
+                                    (v > 0 && v <= 10) ||
+                                    'Dilation must be between 1 and 10 cm',
+                            ]"
                         ></v-text-field>
                     </v-row>
                     <v-row>
                         <v-col>Findings</v-col>
                     </v-row>
                     <v-row>
-                        <v-col
-                            ><v-text-field
+                        <v-col>
+                            <v-text-field
                                 v-model="partograph.hours_ruptured_membranes"
                                 outlined
                                 dense
                                 label="Hours since ruptured membranes"
-                        /></v-col>
-                        <v-col
-                            ><v-text-field
+                            ></v-text-field>
+                        </v-col>
+                        <v-col>
+                            <v-text-field
                                 v-model="partograph.rapid_assesment"
                                 outlined
                                 dense
                                 label="Rapid Assessment"
-                        /></v-col>
-                        <v-col
-                            ><v-text-field
+                            ></v-text-field>
+                        </v-col>
+                        <v-col>
+                            <v-text-field
                                 v-model="partograph.vaginal_bleeding"
                                 outlined
                                 dense
                                 label="Vaginal Bleeding(0+++)"
-                        /></v-col>
+                            ></v-text-field>
+                        </v-col>
                     </v-row>
                     <v-row>
-                        <v-col
-                            ><v-text-field
+                        <v-col>
+                            <v-text-field
                                 v-model="partograph.amniotic_fluid"
                                 outlined
                                 dense
                                 label="Amniotic fluid (meconium stained)"
-                        /></v-col>
-                        <v-col
-                            ><v-text-field
+                            ></v-text-field>
+                        </v-col>
+                        <v-col>
+                            <v-text-field
                                 v-model="partograph.contraction"
                                 outlined
                                 dense
                                 label="Contraction in 10 minutes"
-                        /></v-col>
-                        <v-col
-                            ><v-text-field
+                            ></v-text-field>
+                        </v-col>
+                        <v-col>
+                            <v-text-field
                                 v-model="partograph.fetal_heart_rate"
                                 outlined
                                 dense
                                 label="Fetal heart rate(beats/minute)"
-                        /></v-col>
+                            ></v-text-field>
+                        </v-col>
                     </v-row>
                     <v-row>
-                        <v-col
-                            ><v-text-field
-                                v-model="partograph.urine_volded"
+                        <v-col>
+                            <v-text-field
+                                v-model="partograph.urine_voided"
                                 outlined
                                 dense
-                                label="Urine volded"
-                        /></v-col>
-                        <v-col
-                            ><v-text-field
+                                label="Urine voided"
+                            ></v-text-field>
+                        </v-col>
+                        <v-col>
+                            <v-text-field
                                 v-model="partograph.axiliary"
                                 outlined
                                 dense
                                 label="T(axiliary)"
-                        /></v-col>
-                        <v-col
-                            ><v-text-field
+                            ></v-text-field>
+                        </v-col>
+                        <v-col>
+                            <v-text-field
                                 v-model="partograph.pulse"
                                 outlined
                                 dense
                                 label="Pulse(beats/minutes)"
-                        /></v-col>
+                            ></v-text-field>
+                        </v-col>
                     </v-row>
                     <v-row>
-                        <v-col
-                            ><v-text-field
+                        <v-col>
+                            <v-text-field
                                 v-model="partograph.blood_presure"
                                 outlined
                                 dense
-                                label="Blood Presure(systolic/dialostic)"
-                        /></v-col>
-                        <v-col
-                            ><v-text-field
+                                label="Blood Pressure(systolic/diastolic)"
+                            ></v-text-field>
+                        </v-col>
+                        <v-col>
+                            <v-text-field
                                 v-model="partograph.cervical_dilation"
                                 outlined
                                 dense
                                 label="Cervical Dilation(cm)"
-                        /></v-col>
-                        <v-col
-                            ><v-text-field
+                            ></v-text-field>
+                        </v-col>
+                        <v-col>
+                            <v-text-field
                                 v-model="partograph.delivery_of_placenta"
                                 outlined
                                 dense
                                 label="Delivery of Placenta(beats/minutes)"
-                        /></v-col>
+                            ></v-text-field>
+                        </v-col>
                     </v-row>
                     <v-row>
-                        <v-col
-                            ><v-text-field
+                        <v-col>
+                            <v-text-field
                                 v-model="partograph.oxytocin"
                                 outlined
                                 dense
                                 label="Oxytocin"
-                        /></v-col>
-                        <v-col
-                            ><v-text-field
+                            ></v-text-field>
+                        </v-col>
+                        <v-col>
+                            <v-text-field
                                 v-model="partograph.problem_note_onset"
                                 outlined
                                 dense
                                 label="Problem-note onset/describe below"
-                        /></v-col>
-                        <v-col></v-col>
+                            ></v-text-field>
+                        </v-col>
                     </v-row>
                     <v-row>
-                        <!-- <v-btn @click="getData" color="primary">Load Data</v-btn> -->
                         <v-btn
                             class="ml-2"
                             @click="recordDilation"
                             color="primary"
                             >Record Dilation</v-btn
                         >
-                        <!-- <v-btn class="ml-2" @click="checkProgress" color="primary">Check Progress</v-btn> -->
-                    </v-row>
-                    <v-row>
-                        <v-col> </v-col>
                     </v-row>
                 </v-card-text>
             </v-card>
@@ -282,11 +300,11 @@ export default {
                     text: "Fetal heart rate(beats/minute)",
                     value: "fetal_heart_rate",
                 },
-                { text: "Urine volded", value: "urine_volded" },
+                { text: "Urine voided", value: "urine_voided" },
                 { text: "T(axiliary)", value: "axiliary" },
                 { text: "Pulse(beats/minutes)", value: "pulse" },
                 {
-                    text: "Blood Presure(systolic/dialostic)",
+                    text: "Blood Pressure(systolic/diastolic)",
                     value: "blood_presure",
                 },
                 { text: "Cervical Dilation(cm)", value: "cervical_dilation" },
@@ -305,28 +323,30 @@ export default {
     methods: {
         ...mapActions([]),
         recordDilation() {
-            if (this.selectedDate) {
+            if (
+                this.selectedDate &&
+                this.maxDuration > 0 &&
+                this.maxDuration <= 12 &&
+                this.dilation > 0 &&
+                this.dilation <= 10
+            ) {
                 this.partograph.case_no = this.case_data.case_no;
                 this.partograph.dilation = this.dilation;
                 this.partograph.maxDuration = this.maxDuration;
                 this.partograph.date = this.selectedDate.toLocaleString();
-                this.partograph.time = moment().format("hh:mm:ss");
-                // console.log(this.partograph)
+                this.partograph.time = moment().format("HH:mm:ss");
                 axios({
                     method: "post",
                     url: "partograph_insert",
                     data: this.partograph,
                 });
-                // const time = this.selectedDate.toLocaleString();
                 this.case_Partograph.push(this.partograph);
-                // this.$store.dispatch("getPartograph");
-                // this.case_Partograph;
                 this.partograph = {};
-                // this.getPartograph()
                 this.dialog = false;
-                // this.dilation = null;
             } else {
-                console.error("Please select a starting date and time.");
+                console.error(
+                    "Please select a valid date and ensure max duration is between 1 and 12 hours and dilation is between 1 and 10 cm."
+                );
             }
         },
         drawPartograph() {
