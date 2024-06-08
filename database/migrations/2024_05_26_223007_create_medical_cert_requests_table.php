@@ -13,7 +13,7 @@ class CreateMedicalCertRequestsTable extends Migration {
             $table->string('contact_number');
             $table->string('case_number');
             $table->text('description');
-            $table->string('status')->default('pending');
+            $table->string('status')->default('Pending');
             $table->timestamps();
         });
     }
