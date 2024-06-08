@@ -8,8 +8,8 @@
                 enctype="multipart/form-data"
             >
                 <v-card>
-                    <v-card-title
-                        ><span>Vital Sign Form</span>
+                    <v-card-title>
+                        <span>Vital Sign Form</span>
                         <v-spacer></v-spacer>
                         <v-icon color="white" @click="closeDialog()"
                             >mdi-close</v-icon
@@ -22,43 +22,72 @@
                                 outlined
                                 dense
                                 label="Time"
+                                disabled
                             ></v-text-field>
                             <v-text-field
                                 v-model="vitalSign.blood_presure"
                                 outlined
                                 dense
                                 label="Blood Presure"
+                                :rules="[
+                                    (v) => !!v || 'Blood Pressure is required',
+                                ]"
+                                required
                             ></v-text-field>
                             <v-text-field
                                 type="number"
                                 v-model="vitalSign.temperature"
                                 outlined
                                 dense
-                                label="Temparature"
+                                label="Temperature"
+                                :rules="[
+                                    (v) => !!v || 'Temperature is required',
+                                ]"
+                                required
                             ></v-text-field>
                             <v-text-field
                                 v-model="vitalSign.pulse_rate"
                                 outlined
                                 dense
                                 label="Pulse Rate"
+                                :rules="[
+                                    (v) => !!v || 'Pulse Rate is required',
+                                ]"
+                                required
                             ></v-text-field>
                             <v-text-field
                                 v-model="vitalSign.respiratory_rate"
                                 outlined
                                 dense
                                 label="Respiratory Rate"
+                                :rules="[
+                                    (v) =>
+                                        !!v || 'Respiratory Rate is required',
+                                ]"
+                                required
                             ></v-text-field>
                             <v-text-field
                                 v-model="vitalSign.fetal_heart_tone"
                                 outlined
                                 dense
-                                label="Fetal Hearth Tone"
+                                label="Fetal Heart Tone"
+                                :rules="[
+                                    (v) =>
+                                        !!v || 'Fetal Heart Tone is required',
+                                ]"
+                                required
                             ></v-text-field>
                             <v-text-field
                                 v-model="vitalSign.internal_examination"
                                 outlined
                                 dense
                                 label="Internal Examination"
+                                :rules="[
+                                    (v) =>
+                                        !!v ||
+                                        'Internal Examination is required',
+                                ]"
+                                required
                             ></v-text-field>
                         </v-container>
                     </v-card-text>
@@ -86,7 +115,6 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
 export default {
     props: {
         vitalSign: {
@@ -123,5 +151,3 @@ export default {
     },
 };
 </script>
-
-<style></style>

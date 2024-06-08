@@ -8,8 +8,8 @@
                 enctype="multipart/form-data"
             >
                 <v-card>
-                    <v-card-title
-                        ><span>{{ dialogSetting.title }}</span>
+                    <v-card-title>
+                        <span>{{ dialogSetting.title }}</span>
                         <v-spacer></v-spacer>
                         <v-icon color="white" @click="closeDialog()"
                             >mdi-close</v-icon
@@ -22,12 +22,19 @@
                                 outlined
                                 dense
                                 label="Date"
+                                :rules="[(v) => !!v || 'Date is required']"
+                                required
                             ></v-text-field>
                             <v-text-field
                                 v-model="medication_sheet.medication_dosage"
                                 outlined
                                 dense
                                 label="Medication Dosage"
+                                :rules="[
+                                    (v) =>
+                                        !!v || 'Medication Dosage is required',
+                                ]"
+                                required
                             ></v-text-field>
                             <v-text-field
                                 type="number"
@@ -35,12 +42,18 @@
                                 outlined
                                 dense
                                 label="Hours"
+                                :rules="[(v) => !!v || 'Hours are required']"
+                                required
                             ></v-text-field>
                             <v-text-field
                                 v-model="medication_sheet.stat_medication"
                                 outlined
                                 dense
                                 label="Stat Medication"
+                                :rules="[
+                                    (v) => !!v || 'Stat Medication is required',
+                                ]"
+                                required
                             ></v-text-field>
                         </v-container>
                     </v-card-text>
@@ -105,5 +118,3 @@ export default {
     },
 };
 </script>
-
-<style></style>
