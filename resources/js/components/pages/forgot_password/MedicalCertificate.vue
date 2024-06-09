@@ -165,6 +165,7 @@ export default {
                     this.snackbar.text = "Email Sent and Request Saved";
                     this.snackbar.color = "success";
                     this.resetForm();
+                    window.location.href = "/login";
                 } catch (error) {
                     console.error("An error occurred:", error);
                     this.snackbar.show = true;
