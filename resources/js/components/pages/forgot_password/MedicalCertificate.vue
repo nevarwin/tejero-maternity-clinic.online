@@ -1,101 +1,114 @@
 <template>
     <v-app>
-        <v-container fluid fill-height>
-            <v-row justify="center" align="center">
-                <v-col cols="12" sm="8" md="6">
-                    <v-card>
-                        <v-card-title>
-                            Request For Medical Certificate
-                        </v-card-title>
-                        <v-card-text>
-                            <v-form ref="form" v-model="valid">
-                                <v-row>
-                                    <v-col>
-                                        <v-text-field
-                                            v-model="details.full_name"
-                                            label="Full Name"
-                                            outlined
-                                            dense
-                                            :rules="[
-                                                (v) =>
-                                                    !!v ||
-                                                    'Full Name is required',
-                                            ]"
-                                            required
-                                        />
-                                        <v-text-field
-                                            v-model="details.doctors_name"
-                                            label="Doctors Name"
-                                            outlined
-                                            dense
-                                            :rules="[
-                                                (v) =>
-                                                    !!v ||
-                                                    'Doctors Name is required',
-                                            ]"
-                                            required
-                                        />
-                                        <v-text-field
-                                            v-model="details.contact_number"
-                                            label="Contact Number"
-                                            outlined
-                                            dense
-                                            :rules="[
-                                                (v) =>
-                                                    !!v ||
-                                                    'Contact Number is required',
-                                                (v) =>
-                                                    /^[0-9]{11}$/.test(v) ||
-                                                    'Contact Number must be 11 digits and contain only numbers',
-                                            ]"
-                                            required
-                                            maxlength="11"
-                                        />
-                                        <v-text-field
-                                            v-model="details.case_number"
-                                            label="Case Number"
-                                            outlined
-                                            dense
-                                            :rules="[
-                                                (v) =>
-                                                    !!v ||
-                                                    'Case Number is required',
-                                            ]"
-                                            required
-                                        />
-                                        <v-textarea
-                                            v-model="details.description"
-                                            label="Reason for Request"
-                                            outlined
-                                            dense
-                                            :rules="[
-                                                (v) =>
-                                                    !!v ||
-                                                    'Reason for Request is required',
-                                            ]"
-                                            required
-                                        ></v-textarea>
-                                    </v-col>
-                                </v-row>
-                                <v-row>
-                                    <v-col>
-                                        <v-btn
-                                            dense
-                                            @click="sendEmail"
-                                            block
-                                            color="success"
-                                        >
-                                            Send request
-                                        </v-btn>
-                                    </v-col>
-                                </v-row>
-                            </v-form>
-                        </v-card-text>
-                    </v-card>
-                </v-col>
-            </v-row>
-            <snackbar :snackbar="snackbar" />
-        </v-container>
+        <div>
+            <v-img src="./tejeroMnMClinic/photos/bg.png" alt="My Image" contain>
+                <v-container fluid fill-height>
+                    <v-row justify="center" align="center">
+                        <v-col cols="12" sm="8" md="6">
+                            <v-card>
+                                <v-card-title>
+                                    Request For Medical Certificate
+                                </v-card-title>
+                                <v-card-text>
+                                    <v-form ref="form" v-model="valid">
+                                        <v-row>
+                                            <v-col>
+                                                <v-text-field
+                                                    v-model="details.full_name"
+                                                    label="Full Name"
+                                                    outlined
+                                                    dense
+                                                    :rules="[
+                                                        (v) =>
+                                                            !!v ||
+                                                            'Full Name is required',
+                                                    ]"
+                                                    required
+                                                />
+                                                <v-text-field
+                                                    v-model="
+                                                        details.doctors_name
+                                                    "
+                                                    label="Doctors Name"
+                                                    outlined
+                                                    dense
+                                                    :rules="[
+                                                        (v) =>
+                                                            !!v ||
+                                                            'Doctors Name is required',
+                                                    ]"
+                                                    required
+                                                />
+                                                <v-text-field
+                                                    v-model="
+                                                        details.contact_number
+                                                    "
+                                                    label="Contact Number"
+                                                    outlined
+                                                    dense
+                                                    :rules="[
+                                                        (v) =>
+                                                            !!v ||
+                                                            'Contact Number is required',
+                                                        (v) =>
+                                                            /^[0-9]{11}$/.test(
+                                                                v
+                                                            ) ||
+                                                            'Contact Number must be 11 digits and contain only numbers',
+                                                    ]"
+                                                    required
+                                                    maxlength="11"
+                                                />
+                                                <v-text-field
+                                                    v-model="
+                                                        details.case_number
+                                                    "
+                                                    label="Case Number"
+                                                    outlined
+                                                    dense
+                                                    :rules="[
+                                                        (v) =>
+                                                            !!v ||
+                                                            'Case Number is required',
+                                                    ]"
+                                                    required
+                                                />
+                                                <v-textarea
+                                                    v-model="
+                                                        details.description
+                                                    "
+                                                    label="Reason for Request"
+                                                    outlined
+                                                    dense
+                                                    :rules="[
+                                                        (v) =>
+                                                            !!v ||
+                                                            'Reason for Request is required',
+                                                    ]"
+                                                    required
+                                                ></v-textarea>
+                                            </v-col>
+                                        </v-row>
+                                        <v-row>
+                                            <v-col>
+                                                <v-btn
+                                                    dense
+                                                    @click="sendEmail"
+                                                    block
+                                                    color="success"
+                                                >
+                                                    Send request
+                                                </v-btn>
+                                            </v-col>
+                                        </v-row>
+                                    </v-form>
+                                </v-card-text>
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                    <snackbar :snackbar="snackbar" /> </v-container
+            ></v-img>
+        </div>
     </v-app>
 </template>
 
