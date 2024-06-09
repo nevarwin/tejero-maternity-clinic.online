@@ -86,7 +86,6 @@
                                         class="required uppercase"
                                         dense
                                         :rules="rules.required"
-                                        persistent-placeholder
                                         outlined
                                         name="name"
                                     ></v-text-field>
@@ -98,7 +97,6 @@
                                         class="required uppercase"
                                         dense
                                         :rules="rules.required"
-                                        persistent-placeholder
                                         outlined
                                         name="username"
                                     ></v-text-field>
@@ -111,7 +109,6 @@
                                         dense
                                         type="password"
                                         :rules="rules.password"
-                                        persistent-placeholder
                                         outlined
                                         name="password"
                                     ></v-text-field>
@@ -124,7 +121,6 @@
                                         dense
                                         type="email"
                                         :rules="rules.required"
-                                        persistent-placeholder
                                         outlined
                                         name="email"
                                     ></v-text-field>
