@@ -5,6 +5,11 @@
             <v-col>
                 <v-text-field v-model="search" label="Search" outlined dense />
             </v-col>
+            <v-col>
+                <v-btn color="success" dense @click="toggleInsertDialog"
+                    >Add</v-btn
+                >
+            </v-col>
         </v-row>
         <v-data-table
             :headers="headers"
@@ -43,7 +48,7 @@
                     <v-card-title>
                         <span>Update Med Cert Status</span>
                         <v-spacer></v-spacer>
-                        <v-icon color="white" @click="closeDialog()"
+                        <v-icon color="white" @click="closeDialog"
                             >mdi-close</v-icon
                         >
                     </v-card-title>
@@ -73,28 +78,142 @@
                             color="blue darken-1"
                             text
                             :disabled="dialogBtn"
-                            @click="closeDialog()"
+                            @click="closeDialog"
                             >Close</v-btn
                         >
                         <v-btn
                             color="blue darken-1"
                             text
                             :disabled="dialogBtn"
-                            @click="toggleSave()"
+                            @click="toggleSave"
                             >Update</v-btn
                         >
                     </v-card-actions>
                 </v-card>
             </v-form>
         </v-dialog>
+
+        <v-overlay :value="loadMore" overlay>
+            <v-progress-circular indeterminate size="64"></v-progress-circular>
+        </v-overlay>
+        <v-dialog v-model="insertDialog" persistent max-width="500px">
+            <v-form
+                ref="form"
+                v-model="valid"
+                @submit.prevent="sendEmail"
+                enctype="multipart/form-data"
+            >
+                <v-card>
+                    <v-card-title>
+                        <span>Request For Medical Certificate</span>
+                        <v-spacer></v-spacer>
+                        <v-icon color="white" @click="insertDialog = false"
+                            >mdi-close</v-icon
+                        >
+                    </v-card-title>
+                    <v-card-text>
+                        <v-container fluid fill-height>
+                            <v-row>
+                                <v-col cols="12">
+                                    <v-text-field
+                                        v-model="details.full_name"
+                                        label="Full Name"
+                                        outlined
+                                        dense
+                                        :rules="[
+                                            (v) =>
+                                                !!v || 'Full Name is required',
+                                        ]"
+                                        required
+                                    />
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-text-field
+                                        v-model="details.doctors_name"
+                                        label="Doctors Name"
+                                        outlined
+                                        dense
+                                        :rules="[
+                                            (v) =>
+                                                !!v ||
+                                                'Doctors Name is required',
+                                        ]"
+                                        required
+                                    />
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-text-field
+                                        v-model="details.contact_number"
+                                        label="Contact Number"
+                                        outlined
+                                        dense
+                                        :rules="[
+                                            (v) =>
+                                                !!v ||
+                                                'Contact Number is required',
+                                            (v) =>
+                                                /^[0-9]{11}$/.test(v) ||
+                                                'Contact Number must be 11 digits and contain only numbers',
+                                        ]"
+                                        required
+                                        maxlength="11"
+                                    />
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-text-field
+                                        v-model="details.case_number"
+                                        label="Case Number"
+                                        outlined
+                                        dense
+                                        :rules="[
+                                            (v) =>
+                                                !!v ||
+                                                'Case Number is required',
+                                        ]"
+                                        required
+                                    />
+                                </v-col>
+                                <v-col cols="12">
+                                    <v-textarea
+                                        v-model="details.description"
+                                        label="Reason for Request"
+                                        outlined
+                                        dense
+                                        :rules="[
+                                            (v) =>
+                                                !!v ||
+                                                'Reason for Request is required',
+                                        ]"
+                                        required
+                                    ></v-textarea>
+                                </v-col>
+                            </v-row>
+                        </v-container>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            color="blue darken-1"
+                            text
+                            @click="insertDialog = false"
+                            >Close</v-btn
+                        >
+                        <v-btn color="success" text type="submit"
+                            >Send request</v-btn
+                        >
+                    </v-card-actions>
+                </v-card>
+            </v-form>
+            <snackbar :snackbar="snackbar" />
+        </v-dialog>
     </v-container>
 </template>
 
 <script>
+import axios from "axios";
 import ToolbarComponent from "../../includes/Toolbar";
 import SnackBar from "../../includes/SnackBar.vue";
 import { mapState, mapActions } from "vuex";
-import axios from "axios";
 
 export default {
     name: "MedCert",
@@ -120,6 +239,8 @@ export default {
             search: "",
             tempEditData: "",
             dialog: false,
+            insertDialog: false,
+            loadMore: false,
             dialogBtn: false,
             headers: [
                 { text: "Full Name", value: "full_name" },
@@ -134,6 +255,15 @@ export default {
             ],
             tempid: null,
             tempstatus: null,
+            valid: false,
+            details: {
+                full_name: "",
+                doctors_name: "",
+                contact_number: "",
+                case_number: "",
+                description: "",
+            },
+            toEmail: "angelitocolina2@gmail.com",
         };
     },
     computed: {
@@ -174,6 +304,64 @@ export default {
 
         toggleSave() {
             this.UpdateStatus();
+        },
+
+        toggleInsertDialog() {
+            this.insertDialog = !this.insertDialog;
+        },
+
+        async sendEmail() {
+            if (this.$refs.form.validate()) {
+                this.loadMore = true;
+                try {
+                    await axios.post("api/mail/medcert", {
+                        to: this.toEmail,
+                        name: this.details.full_name,
+                        doctors_name: this.details.doctors_name,
+                        contact_number: this.details.contact_number,
+                        case_number: this.details.case_number,
+                        description: this.details.description,
+                    });
+
+                    await axios.post("api/medcert", {
+                        full_name: this.details.full_name,
+                        doctors_name: this.details.doctors_name,
+                        contact_number: this.details.contact_number,
+                        case_number: this.details.case_number,
+                        description: this.details.description,
+                    });
+
+                    this.snackbar.show = true;
+                    this.snackbar.text = "Email Sent and Request Saved";
+                    this.snackbar.color = "success";
+                    this.loadMore = false;
+                    this.getMedCert();
+                    this.resetForm();
+                    this.toggleInsertDialog(); // Close the insert dialog
+                } catch (error) {
+                    console.error("An error occurred:", error);
+                    this.snackbar.show = true;
+                    this.snackbar.text = "Failed to send request";
+                    this.snackbar.color = "error";
+                }
+            } else {
+                this.snackbar.show = true;
+                this.snackbar.text = "Form is invalid";
+                this.snackbar.color = "error";
+            }
+        },
+
+        resetForm() {
+            this.details = {
+                full_name: "",
+                doctors_name: "",
+                contact_number: "",
+                case_number: "",
+                description: "",
+            };
+            this.$nextTick(() => {
+                this.$refs.form.resetValidation();
+            });
         },
     },
     created() {
