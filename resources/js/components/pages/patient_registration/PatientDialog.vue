@@ -323,48 +323,43 @@
                                             <v-col cols="6">
                                                 <v-select
                                                     label="Province"
-                                                    v-model="
-                                                        patient.province_id
-                                                    "
-                                                    :items="provinceMaster"
+                                                    v-model="selectedProvince"
+                                                    :items="provinceList"
                                                     item-text="name"
-                                                    item-value="id"
+                                                    item-value="prov_code"
                                                     dense
                                                     persistent-placeholder
                                                     outlined
-                                                    name="password"
+                                                    @change="onProvinceChange"
                                                 ></v-select>
                                             </v-col>
-
                                             <v-col cols="6">
-                                                <v-autocomplete
-                                                    label="Municipal"
+                                                <v-select
+                                                    label="Municipality"
                                                     v-model="
-                                                        patient.municipality_id
+                                                        selectedMunicipality
                                                     "
-                                                    :items="selectMunicipal"
+                                                    :items="
+                                                        filteredMunicipalities
+                                                    "
                                                     item-text="name"
-                                                    item-value="id"
+                                                    item-value="mun_code"
                                                     dense
                                                     persistent-placeholder
                                                     outlined
-                                                    name="password"
-                                                ></v-autocomplete>
+                                                ></v-select>
                                             </v-col>
                                             <v-col cols="6">
-                                                <v-autocomplete
+                                                <v-select
                                                     label="Barangay"
-                                                    v-model="
-                                                        patient.barangay_id
-                                                    "
-                                                    :items="selectBarangay"
+                                                    v-model="selectedBarangay"
+                                                    :items="filteredBarangays"
                                                     item-text="name"
-                                                    item-value="id"
+                                                    item-value="brgy_code"
                                                     dense
                                                     persistent-placeholder
                                                     outlined
-                                                    name="password"
-                                                ></v-autocomplete>
+                                                ></v-select>
                                             </v-col>
                                             <v-col cols="6">
                                                 <v-text-field
@@ -441,8 +436,13 @@
 </template>
 
 <script>
+import phil from "phil-reg-prov-mun-brgy";
 import moment from "moment";
 import { mapActions, mapState } from "vuex";
+
+// var phil = require("phil-reg-prov-mun-brgy");
+console.log(phil.city_mun);
+
 export default {
     props: {
         patient: {
@@ -465,8 +465,36 @@ export default {
             { id: 2, name: "Mother" },
         ],
         maxDate: moment().format("YYYY-MM-DD"),
+        selectedProvince: null,
+        selectedMunicipality: null,
+        selectedBarangay: null,
+        provinceList: [],
+        municipalityMaster: [], // All municipalities
+        barangayMaster: [], // All barangays
+        filteredMunicipalities: [],
+        filteredBarangays: [],
     }),
     methods: {
+        onProvinceChange() {
+            // Filter municipalities based on selected province
+
+            this.filteredMunicipalities = this.municipalityMaster.filter(
+                (municipality) =>
+                    municipality.prov_code === this.selectedProvince
+            );
+            // Clear the previously selected municipality and barangay
+            this.selectedMunicipality = null;
+            this.selectedBarangay = null;
+            this.filteredBarangays = [];
+        },
+        onMunicipalityChange() {
+            // Filter barangays based on selected municipality
+            this.filteredBarangays = this.barangayMaster.filter(
+                (barangay) => barangay.mun_code === this.selectedMunicipality
+            );
+            // Clear the previously selected barangay
+            this.selectedBarangay = null;
+        },
         // setSexId() {
         //     if (this.patient.type_of_patient == 2) {
         //         this.patient.sex_id = 1;
@@ -546,28 +574,28 @@ export default {
             "selectCivil",
             "religionData",
         ]),
-        selectMunicipal() {
-            let arr = [];
-            this.provinceMaster.filter((data) => {
-                if (data.id === this.patient.province_id) {
-                    arr = data.municipality;
-                }
-            });
-            return arr;
-        },
-        selectBarangay() {
-            let arr = [];
-            this.provinceMaster.filter((data) => {
-                if (data.id === this.patient.province_id) {
-                    data.municipality.filter((municipal) => {
-                        if (municipal.id === this.patient.municipality_id) {
-                            arr = municipal.barangay;
-                        }
-                    });
-                }
-            });
-            return arr;
-        },
+        // selectMunicipal() {
+        //     let arr = [];
+        //     this.provinceMaster.filter((data) => {
+        //         if (data.id === this.patient.province_id) {
+        //             arr = data.municipality;
+        //         }
+        //     });
+        //     return arr;
+        // },
+        // selectBarangay() {
+        //     let arr = [];
+        //     this.provinceMaster.filter((data) => {
+        //         if (data.id === this.patient.province_id) {
+        //             data.municipality.filter((municipal) => {
+        //                 if (municipal.id === this.patient.municipality_id) {
+        //                     arr = municipal.barangay;
+        //                 }
+        //             });
+        //         }
+        //     });
+        //     return arr;
+        // },
         tempAddressTxt() {
             let province = "";
             let municipality = "";
@@ -618,8 +646,19 @@ export default {
             },
             immediate: true,
         },
+        selectedMunicipality() {
+            this.onMunicipalityChange();
+        },
+    },
+    mounted() {
+        // Initialize provinceMaster, municipalityMaster, and barangayMaster with data
+        this.provinceList = phil.provinces.map((province) => ({
+            prov_code: province.prov_code,
+            name: province.name,
+        }));
+        // Assume phil.municipalities and phil.barangays are the full lists of municipalities and barangays
+        this.municipalityMaster = phil.city_mun;
+        this.barangayMaster = phil.barangays;
     },
 };
 </script>
-
-<style></style>
