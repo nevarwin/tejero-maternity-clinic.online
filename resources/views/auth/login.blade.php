@@ -1642,19 +1642,19 @@
                                 <figure class="single-thumb single-thumb-full">
                                     <img fetchpriority="high" width="2560" height="1792"
                                         alt="Tejero Medical and Maternity Clinic" decoding="async"
-                                        data-srcset="./tejeroMnMClinic/photos/TEJERO MEDICAL.png 2560w, ./tejeroMnMClinic/photos/TEJERO MEDICAL.png 600w"
-                                        data-src="./tejeroMnMClinic/photos/TEJERO MEDICAL.png"
+                                        data-srcset="./tejeroMnMClinic/photos/TEJERO MEDICAL.jpg 2560w, ./tejeroMnMClinic/photos/TEJERO MEDICAL.jpg 600w"
+                                        data-src="./tejeroMnMClinic/photos/TEJERO MEDICAL.jpg"
                                         data-sizes="(max-width: 2560px) 100vw, 2560px"
                                         class="attachment-full size-full wp-post-image lazyloaded"
-                                        src="./tejeroMnMClinic/photos/TEJERO MEDICAL.png"
+                                        src="./tejeroMnMClinic/photos/TEJERO MEDICAL.jpg"
                                         sizes="(max-width: 2560px) 100vw, 2560px"
-                                        srcset="./tejeroMnMClinic/photos/TEJERO MEDICAL.png 2560w, ./tejeroMnMClinic/photos/TEJERO MEDICAL.png 600w">
+                                        srcset="./tejeroMnMClinic/photos/TEJERO MEDICAL.jpg 2560w, ./tejeroMnMClinic/photos/TEJERO MEDICAL.jpg 600w">
                                     <noscript>
                                         <img fetchpriority="high" width="2560" height="1792"
-                                            src="./tejeroMnMClinic/photos/TEJERO MEDICAL.png"
+                                            src="./tejeroMnMClinic/photos/TEJERO MEDICAL.jpg"
                                             class="attachment-full size-full wp-post-image"
                                             alt="Tejero Medical and Maternity Clinic" decoding="async"
-                                            srcset="./tejeroMnMClinic/photos/TEJERO MEDICAL.png 2560w, ./tejeroMnMClinic/photos/TEJERO MEDICAL.png 600w"
+                                            srcset="./tejeroMnMClinic/photos/TEJERO MEDICAL.jpg 2560w, ./tejeroMnMClinic/photos/TEJERO MEDICAL.jpg 600w"
                                             sizes="(max-width: 2560px) 100vw, 2560px" />
                                     </noscript>
                                 </figure>
