@@ -328,7 +328,6 @@
                                                     item-text="name"
                                                     item-value="prov_code"
                                                     dense
-                                                    persistent-placeholder
                                                     outlined
                                                     @change="onProvinceChange"
                                                 ></v-select>
@@ -345,7 +344,6 @@
                                                     item-text="name"
                                                     item-value="mun_code"
                                                     dense
-                                                    persistent-placeholder
                                                     outlined
                                                 ></v-select>
                                             </v-col>
@@ -357,7 +355,6 @@
                                                     item-text="name"
                                                     item-value="brgy_code"
                                                     dense
-                                                    persistent-placeholder
                                                     outlined
                                                 ></v-select>
                                             </v-col>
@@ -441,7 +438,7 @@ import moment from "moment";
 import { mapActions, mapState } from "vuex";
 
 // var phil = require("phil-reg-prov-mun-brgy");
-console.log(phil.city_mun);
+console.log(phil.getBarangayByMun(140101));
 
 export default {
     props: {
@@ -477,7 +474,6 @@ export default {
     methods: {
         onProvinceChange() {
             // Filter municipalities based on selected province
-
             this.filteredMunicipalities = this.municipalityMaster.filter(
                 (municipality) =>
                     municipality.prov_code === this.selectedProvince
@@ -495,11 +491,7 @@ export default {
             // Clear the previously selected barangay
             this.selectedBarangay = null;
         },
-        // setSexId() {
-        //     if (this.patient.type_of_patient == 2) {
-        //         this.patient.sex_id = 1;
-        //     }
-        // },
+
         refresh() {
             this.snackbar.show = false;
             location.reload();
@@ -532,14 +524,7 @@ export default {
             }
         },
         filterNumericInput(event) {
-            // Remove non-numeric characters
-            // if(val != null){
-            //     val = val.replace(/[^0-9]/g, '');
-            // }
-
             const charCode = event.charCode;
-
-            // Allow only numeric characters
             if (charCode < 48 || charCode > 57) {
                 event.preventDefault();
             }
@@ -560,7 +545,6 @@ export default {
                 let aog = moment.duration(
                     moment().diff(moment(this.patient.lmp, "YYYY-MM-DD"))
                 );
-                // let aog = moment(this.patient.lmp, "YYYY-MM-DD").add(9,'M').add(7,'d').format('YYYY-MM-DD')
                 console.log(aog.asWeeks());
                 this.patient.aog = Math.floor(aog.asWeeks());
             }
@@ -574,67 +558,50 @@ export default {
             "selectCivil",
             "religionData",
         ]),
-        // selectMunicipal() {
-        //     let arr = [];
-        //     this.provinceMaster.filter((data) => {
-        //         if (data.id === this.patient.province_id) {
-        //             arr = data.municipality;
-        //         }
-        //     });
-        //     return arr;
-        // },
-        // selectBarangay() {
-        //     let arr = [];
-        //     this.provinceMaster.filter((data) => {
-        //         if (data.id === this.patient.province_id) {
-        //             data.municipality.filter((municipal) => {
-        //                 if (municipal.id === this.patient.municipality_id) {
-        //                     arr = municipal.barangay;
-        //                 }
-        //             });
-        //         }
-        //     });
-        //     return arr;
-        // },
         tempAddressTxt() {
-            let province = "";
-            let municipality = "";
-            let barangay = "";
-            let region = "";
-            let completeAddress = [this.patient.house_address];
-            this.provinceMaster.filter((data) => {
-                if (data.id === this.patient.province_id) {
-                    province = data.name;
-                    completeAddress[3] = data.name;
-                    data.municipality.filter((municipal) => {
-                        if (municipal.id === this.patient.municipality_id) {
-                            municipality = municipal.name;
-                            completeAddress[2] = municipal.name;
-                            municipal.barangay.filter((bar) => {
-                                if (bar.id === this.patient.barangay_id) {
-                                    barangay = bar.name;
-                                    completeAddress[1] = bar.name;
-                                }
-                            });
-                        }
-                    });
-                }
-            });
-            if (!this.patient.house_address) {
-                completeAddress.shift();
+            let completeAddress = [];
+
+            if (this.patient.house_address) {
+                completeAddress.push(this.patient.house_address);
             }
+
+            if (this.selectedBarangay) {
+                completeAddress.push(this.selectedBarangay);
+            }
+
+            if (this.selectedMunicipality) {
+                const municipality = this.filteredMunicipalities.find(
+                    (mun) => mun.mun_code === this.selectedMunicipality
+                );
+                if (municipality) {
+                    completeAddress.push(municipality.name);
+                }
+            }
+
+            if (this.selectedProvince) {
+                const province = this.provinceList.find(
+                    (prov) => prov.prov_code === this.selectedProvince
+                );
+                if (province) {
+                    completeAddress.push(province.name);
+                }
+            }
+
             if (this.patient.region) {
                 completeAddress.push(this.patient.region);
             }
+
             console.log("totok", completeAddress);
             this.patient.address_txt = completeAddress.join(" ");
-            return completeAddress.join(" ");
-            // return this.tempHouse + ' ' + barangay + ' ' + municipality + ' ' + province
+            return this.patient.address_txt;
         },
     },
     watch: {
         dialog(val) {
             if (!val) {
+                this.selectedMunicipality = null;
+                this.selectedBarangay = null;
+                this.selectedProvince = null;
                 this.$refs.Insert.resetValidation();
             }
         },
@@ -651,12 +618,12 @@ export default {
         },
     },
     mounted() {
-        // Initialize provinceMaster, municipalityMaster, and barangayMaster with data
-        this.provinceList = phil.provinces.map((province) => ({
-            prov_code: province.prov_code,
-            name: province.name,
-        }));
-        // Assume phil.municipalities and phil.barangays are the full lists of municipalities and barangays
+        this.provinceList = phil.provinces
+            .map((province) => ({
+                name: province.name,
+                prov_code: province.prov_code,
+            }))
+            .sort((a, b) => a.name.localeCompare(b.name));
         this.municipalityMaster = phil.city_mun;
         this.barangayMaster = phil.barangays;
     },
