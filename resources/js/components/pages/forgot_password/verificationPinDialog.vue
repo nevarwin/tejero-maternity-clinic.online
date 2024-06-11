@@ -109,10 +109,10 @@ export default {
                     this.snackbar.text = "WRONG PIN PLEASE TRY AGAIN";
                     this.snackbar.color = "error";
 
-                    setTimeout(() => {
-                        //this.$router.replace('/login')
-                        window.location.reload();
-                    }, 2000);
+                    // setTimeout(() => {
+                    //     //this.$router.replace('/login')
+                    //     window.location.reload();
+                    // }, 2000);
                 }
             });
         },
