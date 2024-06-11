@@ -19,7 +19,7 @@ class AdmissionController extends Controller {
                 $case->patient_id = $request->patient_id;
                 $case->doctor_id = $request->doctor_id;
                 $case->room_id = $request->room_id;
-                $case->bed_name = $request->bed_name;
+                $case->bed_name = $request->bed_id;
                 $case->relationship = strtoupper($request->relationship);
                 $case->husband_name = strtoupper($request->husband_name);
                 $case->save();

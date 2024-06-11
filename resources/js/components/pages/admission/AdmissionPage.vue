@@ -194,7 +194,7 @@ export default {
                         axios({
                             method: "post",
                             url: "update_bed",
-                            data: { id: this.tempData.bed_name, vacant: "yes" },
+                            data: { id: this.tempData.bed_id, vacant: "yes" },
                         });
                         // this.$refs.Insert.resetValidation()
                         this.getAdmision();

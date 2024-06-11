@@ -103,7 +103,7 @@
                                         dense
                                         :rules="rules.required"
                                         outlined
-                                        name="bed_name"
+                                        name="bed_id"
                                     ></v-autocomplete>
                                 </v-col>
                                 <v-col cols="12">
